@@ -18,14 +18,12 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
   const onLogin = ({ userName, password }: Login) => {
     // TODO. AUTHENTICATION LOGIC
-    console.log("first");
-
     if (!(userName && password)) return;
 
     // if authentication ... set token
     setToken(Math.random());
 
-    const origin = location.state?.from?.pathname || "/dashboard";
+    const origin = location.state?.from?.pathname || "/home";
 
     navigate(origin);
   };

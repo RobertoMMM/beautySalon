@@ -24,7 +24,7 @@ const LoginPage = () => {
     <div>
       <div>Shopping form</div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="loginForm">
+      <form onSubmit={handleSubmit(onSubmit)}>
         {formModel.map((element) => (
           <FormInputs
             key={element.name}

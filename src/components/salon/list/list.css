@@ -1,0 +1,19 @@
+.listTitle {
+  width: 100px;
+  height: 30px;
+  font-size: 30px;
+  line-height: 30px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: rgba(0, 0, 0, 0.96);
+}
+
+.list {
+  position: relative;
+  top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 120px);
+  row-gap: 48px;
+  column-gap: 103px;
+  width: 100%;
+}

@@ -1,7 +1,10 @@
 import { createContext, FC, ReactNode, useState } from "react";
 import { Service } from "../../ts/interfaces";
 
-export const RegisterServices = createContext({});
+export const RegisterServices = createContext({
+  service: {},
+  setService: (service: Service) => {},
+});
 
 const RegisterServicesProvider: FC<{ children: ReactNode }> = ({
   children,

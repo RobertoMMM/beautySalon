@@ -1,11 +1,10 @@
-import Home from "../pages/HomePage";
+import Home from "../pages/home/HomePage";
 import LoginPage from "../pages/login/index";
-import Dashboard from "../pages/Dashboard";
-import OrderPage from "../pages/orderPage/orderPage";
 import NoMatch from "../pages/error/NoMatch";
 import HelpPage from "../pages/help/HelpPage";
-import OrdersPage from "../pages/orderPage/orders";
+import OrdersPage from "../pages/orders/orders";
 import Redirect from "../components/ProtectedRoute/Redirect";
+import { OrderRoutes } from "./modules/order";
 
 const ROUTES = [
   {
@@ -24,16 +23,6 @@ const ROUTES = [
     isProtected: false,
   },
   {
-    path: "dashboard",
-    element: <Dashboard />,
-    isProtected: true,
-  },
-  {
-    path: "order",
-    element: <OrderPage />,
-    isProtected: true,
-  },
-  {
     path: "help",
     element: <HelpPage />,
     isProtected: false,
@@ -48,6 +37,7 @@ const ROUTES = [
     element: <NoMatch />,
     isProtected: false,
   },
+  ...OrderRoutes,
 ];
 
 export { ROUTES };

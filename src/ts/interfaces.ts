@@ -1,6 +1,14 @@
+import { ReactElement } from "react";
+
 interface Login {
   userName: string;
   password: string;
+}
+
+interface OrderStepsPages {
+  idStep: number;
+  description: string;
+  content: ReactElement;
 }
 
 interface Authentication {
@@ -33,4 +41,5 @@ interface Service {
   time: ServiceTime;
   price: ServicePrice;
 }
-export type { Login, Authentication, Client, Service };
+
+export type { Login, Authentication, OrderStepsPages, Client, Service };
