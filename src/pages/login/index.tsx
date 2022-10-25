@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import FormInputs from "../../components/forms/FormInputs";
+import FormInputs from "../../components/modules/forms/FormInputs";
 import useAuth from "../../hooks/useAuth";
 import formModel from "../../static/loginFormInputs.json";
 import { Login } from "../../ts/interfaces";
@@ -11,14 +11,11 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<Login>();
 
-  const onSubmit: SubmitHandler<Login> = ({ userName, password }) => {
-    onLogin({ userName, password });
-
-    reset();
+  const onSubmit: SubmitHandler<Login> = ({ email, password }) => {
+    onLogin({ email, password });
   };
   return (
     <div>

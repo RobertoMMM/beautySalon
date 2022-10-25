@@ -1,4 +1,4 @@
-import CustomOrderButton from "../../../components/buttons/order";
+import CustomOrderButton from "../../../components/modules/buttons/order";
 import arrowImage from "../../../assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
 

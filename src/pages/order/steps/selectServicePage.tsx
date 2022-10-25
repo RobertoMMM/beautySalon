@@ -1,11 +1,11 @@
-import CustomOrderButton from "../../../components/buttons/order";
+import CustomOrderButton from "../../../components/modules/buttons/order";
 import arrowImage from "../../../assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
 import useRegisterService from "../../../hooks/useService";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Service } from "../../../ts/interfaces";
-import formModel from "../../../static/register/service.json";
-import FormInputs from "../../../components/forms/FormInputs";
+import FormInputs from "../../../components/modules/forms/FormInputs";
+import formModel from "../../../static/register/service";
 
 const SelectServicePage = () => {
   const navigate = useNavigate();
@@ -14,14 +14,12 @@ const SelectServicePage = () => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm<Service>();
 
-  const onSubmit: SubmitHandler<any> = (data) => {
+  const onSubmit: SubmitHandler<Service> = (data) => {
+    setService(data);
     navigate("/order/2");
-    // console.log(data);
-    // reset();
   };
 
   return (

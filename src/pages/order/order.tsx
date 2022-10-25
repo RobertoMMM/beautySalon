@@ -1,4 +1,4 @@
-import NewOrderHeader from "../../components/order/newOrder";
+import NewOrderHeader from "../../components/modules/order/newOrder";
 import { OrderStepsPages } from "../../ts/interfaces";
 
 const OrderStepsGenerator = ({ details }: { details: OrderStepsPages }) => {

@@ -1,5 +1,6 @@
 import EmailInput from "./inputs/EmailInput";
 import InputText from "./inputs/InputText";
+import NumberInput from "./inputs/NumberInput";
 import PasswordInput from "./inputs/PasswordInput";
 import SelectInput from "./inputs/SelectInput";
 
@@ -17,6 +18,9 @@ const FormInputs = ({ element, register, errors }: any) => {
       break;
     case "select":
       InputElement = SelectInput;
+      break;
+    case "number":
+      InputElement = NumberInput;
       break;
     default:
       InputElement = InputText;

@@ -1,8 +1,13 @@
-import { createContext, FC, ReactNode } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { createContext, FC, ReactNode, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import useLocalStorage from "../hooks/useLocalStorage";
-import { AUTH_KEY } from "../ts/enums";
+import { auth } from "../firebase/config";
 import { Authentication, Login } from "../ts/interfaces";
+import { Token } from "../ts/types";
 
 export const AuthContext = createContext<Authentication>({
   token: null,
@@ -14,29 +19,51 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [token, setToken] = useLocalStorage({ key: AUTH_KEY });
+  const [token, setToken] = useState<Token>(null);
 
-  const onLogin = ({ userName, password }: Login) => {
-    // TODO. AUTHENTICATION LOGIC
-    if (!(userName && password)) return;
+  const createNewAccount = async ({ email, password }: Login) => {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const userToken = await user.getIdToken();
 
-    // if authentication ... set token
-    setToken(Math.random());
+    setToken(userToken);
+  };
+
+  const signIn = async ({ email, password }: Login) => {
+    const { user } = await signInWithEmailAndPassword(auth, email, password);
+    const userToken = await user.getIdToken();
+
+    setToken(userToken);
+  };
+
+  const onLogin = async ({ email, password }: Login) => {
+    if (!(email && password)) return;
+
+    try {
+      await signIn({ email, password });
+    } catch (e) {
+      await createNewAccount({ email, password });
+    }
 
     const origin = location.state?.from?.pathname || "/home";
 
     navigate(origin);
   };
 
-  const onLogout = () => {
-    setToken(null);
+  // bobby1@gmail.com
+  const onLogout = async () => {
+    try {
+      await signOut(auth);
+      setToken(null);
+    } catch (error: any) {
+      alert(error);
+    }
   };
 
-  const value: Authentication = {
-    token,
-    onLogin,
-    onLogout,
-  };
+  const value: Authentication = { token, onLogin, onLogout };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

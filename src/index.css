@@ -50,3 +50,14 @@ form div label {
   display: flex;
   justify-content: end;
 }
+
+form div p {
+  position: absolute;
+  z-index: 1;
+  margin-top: -100px;
+  left: 0;
+  border: 1px solid red;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 500;
+}

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CustomOrderButton from "../../../components/buttons/order";
+import CustomOrderButton from "../../../components/modules/buttons/order";
 import arrowImage from "../../../assets/dropdown.png";
 
 const FinishOrderPage = () => {

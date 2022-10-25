@@ -1,19 +1,11 @@
 [
   {
-    "type": "text",
-    "name": "userName",
-    "label": "User Name",
-    "placeholder": "Your username",
+    "type": "email",
+    "name": "email",
+    "label": "Email",
+    "placeholder": "bobby@gmail.com",
     "register": {
-      "required": "Username is required",
-      "minLength": {
-        "value": 10,
-        "message": "Username must be at least 10 characters"
-      },
-      "maxLength": {
-        "value": 20,
-        "message": "Max length 20"
-      }
+      "required": "Email is required"
     }
   },
   {
