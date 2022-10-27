@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom";
-import womenImage from "../../assets/women.png";
-import dropdownImage from "../../assets/dropdown.png";
+import womenImage from "assets/women.png";
+import dropdownImage from "assets/dropdown.png";
 import "./style.css";
+import CustomButton from "../modules/button";
+import useAuth from "hooks/useAuth";
 
 const CustomLink = ({ to, title }: { to: string; title: string }) => {
   return (
@@ -15,6 +17,8 @@ const CustomLink = ({ to, title }: { to: string; title: string }) => {
 };
 
 const Layout = () => {
+  const { onLogout } = useAuth();
+
   const Navbar = () => {
     return (
       <nav className="navbar">
@@ -33,6 +37,8 @@ const Layout = () => {
             <img src={dropdownImage} alt="dropdown" />
             <div className="dropdownContent">
               <CustomLink to="login" title="Login" />
+              <CustomLink to="order/1" title="Order" />
+              <CustomButton onClick={onLogout}>Sign out</CustomButton>
             </div>
           </div>
         </div>

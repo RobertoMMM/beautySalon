@@ -1,51 +1,57 @@
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { createContext, FC, ReactNode, useMemo, useState } from "react";
+import { useEffect, createContext, FC, ReactNode, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { auth } from "../firebase/config";
-import { Authentication, Login } from "../ts/interfaces";
-import { Token } from "../ts/types";
+import { Authentication, Login } from "ts/interfaces";
+import { Token } from "ts/types";
 
-export const AuthContext = createContext<Authentication>({
-  token: null,
-  onLogout: () => {},
-  onLogin: () => {},
-});
+export const AuthContext = createContext<Authentication>({} as Authentication);
+
+const createNewAccount = async ({ email, password }: Login) => {
+  const { user } = await createUserWithEmailAndPassword(auth, email, password);
+  const userToken = await user.getIdToken();
+
+  return userToken;
+};
+
+const signIn = async ({ email, password }: Login) => {
+  const { user } = await signInWithEmailAndPassword(auth, email, password);
+  const userToken = await user.getIdToken();
+
+  return userToken;
+};
 
 const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [token, setToken] = useState<Token>(null);
+  const [token, setToken] = useState<Token>("");
 
-  const createNewAccount = async ({ email, password }: Login) => {
-    const { user } = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-    const userToken = await user.getIdToken();
+  const [pending, setPending] = useState(true);
 
-    setToken(userToken);
-  };
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
 
-  const signIn = async ({ email, password }: Login) => {
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
-    const userToken = await user.getIdToken();
-
-    setToken(userToken);
-  };
+        setToken(token);
+      }
+      setPending(false);
+    });
+  }, []);
 
   const onLogin = async ({ email, password }: Login) => {
     if (!(email && password)) return;
 
     try {
-      await signIn({ email, password });
+      setToken(await signIn({ email, password }));
     } catch (e) {
-      await createNewAccount({ email, password });
+      setToken(await createNewAccount({ email, password }));
     }
 
     const origin = location.state?.from?.pathname || "/home";
@@ -53,7 +59,6 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     navigate(origin);
   };
 
-  // bobby1@gmail.com
   const onLogout = async () => {
     try {
       await signOut(auth);
@@ -63,9 +68,13 @@ const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     }
   };
 
-  const value: Authentication = { token, onLogin, onLogout };
+  const value: Authentication = { token, setToken, onLogin, onLogout };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {pending ? <>Loading...</> : children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

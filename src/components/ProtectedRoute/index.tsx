@@ -1,17 +1,14 @@
-import { ReactElement } from "react";
-import { useLocation, Navigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
+import useAuth from "hooks/useAuth";
 
-const ProtectedRoute = ({ children }: { children: ReactElement }) => {
+const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
   const { token } = useAuth();
-  console.log(token);
-  const location = useLocation();
 
   if (!token) {
-    return <Navigate to="/home" replace state={{ from: location }} />;
+    return <Navigate to="/home" replace={true} />;
   }
 
-  return children;
+  return element;
 };
 
 export default ProtectedRoute;

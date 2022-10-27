@@ -14,6 +14,7 @@ interface OrderStepsPages {
 
 interface Authentication {
   token: Token;
+  setToken: (newToken: string) => void;
   onLogin: ({ email, password }: Login) => void;
   onLogout: () => void;
 }
@@ -24,14 +25,33 @@ interface Client {
   email: string;
   comments: string;
 }
+
+interface SelectInput {
+  label: string;
+  value: string;
+}
 interface Service {
-  serviceCategory: string;
-  service: string;
-  master: string;
+  serviceCategory: SelectInput;
+  service: SelectInput;
+  masters: SelectInput;
   date: string;
   time: string;
   price: string;
-  currency: string;
+  currency: SelectInput;
 }
 
-export type { Login, Authentication, OrderStepsPages, Client, Service };
+interface ClientInformation {
+  name: string;
+  phone: string;
+  email: string;
+  comments: string;
+}
+
+export type {
+  Login,
+  Authentication,
+  OrderStepsPages,
+  Client,
+  Service,
+  ClientInformation,
+};

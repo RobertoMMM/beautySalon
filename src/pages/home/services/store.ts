@@ -1,4 +1,4 @@
-import Image from "../../../assets/hair.png";
+import Image from "assets/hair.png";
 
 const services = [
   {

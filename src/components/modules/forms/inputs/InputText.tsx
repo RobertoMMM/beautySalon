@@ -1,16 +1,26 @@
+import { TextField } from "@mui/material";
+
 const InputText = ({ element, register, errors }: any) => {
-  const { label, type, name, placeholder } = element;
+  const { label, name, placeholder } = element;
 
   return (
     <div>
-      <label>{label}</label>
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        {...register(name, { ...element.register })}
-      />
-      {errors[name] && <p>{errors[name]?.message}</p>}
+      {errors[name] ? (
+        <TextField
+          error
+          id="outlined-error-helper-text"
+          label="Error"
+          helperText={errors[name]?.message}
+        />
+      ) : (
+        <TextField
+          name={name}
+          placeholder={placeholder}
+          id="demo-helper-text-aligned"
+          label={label}
+          {...register(name, { ...element.register })}
+        />
+      )}
     </div>
   );
 };

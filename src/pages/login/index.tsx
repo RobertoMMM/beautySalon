@@ -1,9 +1,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import FormInputs from "../../components/modules/forms/FormInputs";
-import useAuth from "../../hooks/useAuth";
-import formModel from "../../static/loginFormInputs.json";
-import { Login } from "../../ts/interfaces";
-import "./style.css";
+import CustomButton from "components/modules/button";
+import FormInputs from "components/modules/forms/FormInputs";
+import useAuth from "hooks/useAuth";
+import formModel from "static/loginFormInputs.json";
+import { Login } from "ts/interfaces";
 
 const LoginPage = () => {
   const { onLogin } = useAuth();
@@ -30,7 +30,7 @@ const LoginPage = () => {
             errors={errors}
           />
         ))}
-        <button type="submit">Sign in</button>
+        <CustomButton type="submit">Let's Start</CustomButton>
       </form>
     </div>
   );

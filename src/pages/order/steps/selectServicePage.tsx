@@ -1,4 +1,3 @@
-import CustomOrderButton from "../../../components/modules/buttons/order";
 import arrowImage from "../../../assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
 import useRegisterService from "../../../hooks/useService";
@@ -6,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { Service } from "../../../ts/interfaces";
 import FormInputs from "../../../components/modules/forms/FormInputs";
 import formModel from "../../../static/register/service";
+import CustomButton from "../../../components/modules/button";
 
 const SelectServicePage = () => {
   const navigate = useNavigate();
@@ -15,9 +15,12 @@ const SelectServicePage = () => {
     register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<Service>();
 
   const onSubmit: SubmitHandler<Service> = (data) => {
+    console.log(data);
+
     setService(data);
     navigate("/order/2");
   };
@@ -31,16 +34,17 @@ const SelectServicePage = () => {
             element={element}
             register={register}
             errors={errors}
+            control={control}
           />
         ))}
-        <CustomOrderButton type="submit">
+        <CustomButton type="submit">
           Next step
           <img
             style={{ transform: "rotate(-90deg)" }}
             src={arrowImage}
             alt="image"
           />
-        </CustomOrderButton>
+        </CustomButton>
       </form>
     </>
   );

@@ -2,7 +2,7 @@ import { masters } from "./masters/store";
 import { products } from "./products/store";
 import { services } from "./services/store";
 import "./home.css";
-import List from "../../components/modules/salon/list";
+import List from "components/modules/salon/list";
 
 const Services = () => {
   return (

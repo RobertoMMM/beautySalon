@@ -1,7 +1,5 @@
 import { createContext, FC, ReactNode, useState } from "react";
-import { Client } from "../../ts/interfaces";
-
-export const RegisterClient = createContext({});
+import { Client } from "ts/interfaces";
 
 const initialClient = {
   name: "",
@@ -9,6 +7,11 @@ const initialClient = {
   email: "",
   comments: "",
 };
+
+export const RegisterClient = createContext({
+  client: initialClient,
+  setClient: (newClient: Client) => {},
+});
 
 const RegisterClientProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [client, setClient] = useState<Client>(initialClient);

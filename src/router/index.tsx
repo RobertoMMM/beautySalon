@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "../components/ProtectedRoute/index";
+import ProtectedRoute from "components/ProtectedRoute/index";
 import { ROUTES } from "./routes";
-import MainProvider from "../context/MainProvider";
-import Layout from "../components/navbar";
+import MainProvider from "context/MainProvider";
+import Layout from "components/navbar";
 
 const MainRouter = () => {
   return (
@@ -15,7 +15,7 @@ const MainRouter = () => {
                 <Route
                   key={path}
                   path={`/${path}`}
-                  element={<ProtectedRoute children={element} />}
+                  element={<ProtectedRoute element={element} />}
                 />
               ) : (
                 <Route key={path} path={`/${path}`} element={element} />

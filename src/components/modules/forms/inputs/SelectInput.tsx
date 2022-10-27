@@ -1,20 +1,33 @@
-const SelectInput = ({ element, register, errors }: any) => {
-  const { label, name } = element;
+import { Autocomplete, TextField } from "@mui/material";
+import { Controller } from "react-hook-form";
+
+const SelectInput = ({ element, register, errors, control }: any) => {
+  const { label, name, options } = element;
 
   return (
-    <div>
-      <label>{label}</label>
-      <select name={name} {...register(name, { ...element.register })}>
-        {element.options.map(
-          ({ value, text }: { value: string | number; text: string }) => (
-            <option key={value} value={value}>
-              {text}
-            </option>
-          )
+    <>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field: { onChange } }) => (
+          <Autocomplete
+            name={name}
+            {...register(name, { ...element.register })}
+            id="combo-box-demo"
+            options={options}
+            onChange={(_, data: any) => {
+              return onChange(data?.value);
+            }}
+            sx={{ width: 600 }}
+            isOptionEqualToValue={(option: any, value: any) =>
+              option.id === value.id
+            }
+            renderInput={(params) => <TextField {...params} label={label} />}
+          />
         )}
-      </select>
+      />
       {errors[element.name] && <p>{errors[element.name]?.message}</p>}
-    </div>
+    </>
   );
 };
 
