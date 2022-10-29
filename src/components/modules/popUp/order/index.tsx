@@ -14,13 +14,13 @@ const OrderPopUp = () => {
       position: "relative",
       top: "30%",
     },
-    "& div:nth-child(1)": {
+    "& div:nth-of-type(1)": {
       top: "15%",
       color: "#5255C8",
       fontSize: "22px",
       textTransform: "capitalize",
     },
-    "& div:nth-child(2)": {
+    "& div:nth-of-type(2)": {
       top: "30%",
     },
     "& button": {

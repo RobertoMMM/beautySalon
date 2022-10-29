@@ -37,7 +37,7 @@ const Layout = () => {
   };
 
   const Navbar = () => {
-    const userName = useSelector(getUserName) || "UK";
+    const userName = useSelector(getUserName)?.slice(0, 2) || "UK";
 
     return (
       <>

@@ -2,6 +2,7 @@ import Textarea from "@mui/joy/Textarea";
 
 const TextareaInput = ({ element, register }: any) => {
   const { name, placeholder } = element;
+
   const textareaStyles = {
     width: "579px",
     height: "138px",

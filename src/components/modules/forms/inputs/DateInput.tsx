@@ -3,7 +3,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
-const DateInput = ({ element, register }: any) => {
+const DateInput = ({ element, register, errors }: any) => {
   const { name, label } = element;
 
   const currentDate = new Date();
@@ -16,7 +16,16 @@ const DateInput = ({ element, register }: any) => {
           onChange={() => {}}
           label={label}
           minDate={currentDate}
-          renderInput={(params) => <TextField {...params} />}
+          sx={{ width: 600 }}
+          renderInput={(params) => (
+            <>
+              {errors[name] ? (
+                <TextField error {...params} />
+              ) : (
+                <TextField {...params} />
+              )}
+            </>
+          )}
         />
       </LocalizationProvider>
     </>

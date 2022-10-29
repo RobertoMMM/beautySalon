@@ -7,6 +7,7 @@ const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
 
   if (!token) {
     alert("Please login first");
+
     return <Navigate to="/" replace={true} />;
   }
 

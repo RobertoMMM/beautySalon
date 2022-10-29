@@ -2,56 +2,43 @@ import { Login } from "ts/interfaces";
 import { Token } from "ts/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "app/store";
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-} from "firebaseConfig";
+import { createNewAccount, signIn } from "./helpers";
+import { clearUserDataCookie } from "utils/cookie";
 
 interface Authentication {
   token: Token;
   email: string;
   password: string;
-  userName: string;
+  username: string;
 }
 
 const initialState: Authentication = {
   token: "",
   email: "",
   password: "",
-  userName: "",
-};
-
-const createNewAccount = async ({ email, password }: Login) => {
-  const { user } = await createUserWithEmailAndPassword(auth, email, password);
-  const userToken = await user.getIdToken();
-
-  return userToken;
-};
-
-const signIn = async ({ email, password }: Login) => {
-  const { user } = await signInWithEmailAndPassword(auth, email, password);
-  const userToken = await user.getIdToken();
-
-  return userToken;
+  username: "",
 };
 
 const onLogin = createAsyncThunk(
   "auth/signOrCreateUser",
-  async ({ email, password, userName }: Login) => {
+  async ({ email, password, username }: Login) => {
     try {
-      const token: Token = await signIn({ email, password, userName });
-
-      return { email, password, token, userName };
-    } catch (e) {
-      const token: Token = await createNewAccount({
+      const { userToken: token, userEmail } = await signIn({
         email,
         password,
-        userName,
+        username,
       });
 
-      return { email, password, token, userName };
+      return { email: userEmail, password, token, username };
+    } catch (e) {
+      console.log(e);
+      const { userToken: token, userEmail } = await createNewAccount({
+        email,
+        password,
+        username,
+      });
+
+      return { email: userEmail, password, token, username };
     }
   }
 );
@@ -64,14 +51,18 @@ const authSlice = createSlice({
       state.token = payload;
     },
     setUserName(state, { payload }: { payload: string }) {
-      state.userName = payload;
+      state.username = payload;
+    },
+    setUserEmail(state, { payload }: { payload: string }) {
+      state.email = payload;
     },
     onLogout(state) {
-      signOut(auth);
+      clearUserDataCookie();
+
       state.token = "";
       state.email = "";
       state.password = "";
-      state.userName = "";
+      state.username = "";
     },
   },
   extraReducers: (builder) => {
@@ -81,17 +72,18 @@ const authSlice = createSlice({
         state.token = payload.token;
         state.email = payload.email;
         state.password = payload.password;
-        state.userName = payload.userName;
+        state.username = payload.username;
       }
     );
   },
 });
 
-export const { setToken, onLogout, setUserName } = authSlice.actions;
+export const { setToken, onLogout, setUserName, setUserEmail } =
+  authSlice.actions;
 
 export const getUserToken = ({ auth }: RootState) => auth.token;
 export const getUserEmail = ({ auth }: RootState) => auth.email;
-export const getUserName = ({ auth }: RootState) => auth.userName;
+export const getUserName = ({ auth }: RootState) => auth.username;
 
 export { onLogin };
 

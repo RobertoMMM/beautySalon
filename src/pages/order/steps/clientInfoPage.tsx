@@ -4,31 +4,41 @@ import CustomButton from "components/modules/button";
 import { ClientInformation } from "ts/interfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputs from "components/modules/forms/FormInputs";
-import formModel from "static/register/clientInformation.json";
-import { useAppDispatch } from "app/store";
+import { clientForm } from "static/register/clientInformation";
+import { useAppDispatch, useAppSelector } from "app/store";
 import { setClientInfo } from "features/client/clientSlice";
+import { getUserEmail, getUserName } from "features/auth/authSlice";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useAppDispatch();
 
+  const email = useAppSelector(getUserEmail);
+  const name = useAppSelector(getUserName);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ClientInformation>();
+  } = useForm<ClientInformation>({
+    defaultValues: {
+      email,
+      name,
+    },
+  });
 
   const onSubmit: SubmitHandler<ClientInformation> = (clientInfo) => {
     dispatch(setClientInfo(clientInfo));
+
     navigate("/order/3");
   };
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        {formModel.map((element) => (
+        {clientForm.map((element) => (
           <FormInputs
             key={element.name}
             element={element}

@@ -13,10 +13,18 @@ const TimeInput = ({ element, register, errors }: any) => {
           {...register(name, { ...element.register })}
           onChange={() => {}}
           label={label}
-          renderInput={(params) => <TextField {...params} />}
+          sx={{ width: 600 }}
+          renderInput={(params) => (
+            <>
+              {errors[name] ? (
+                <TextField error {...params} />
+              ) : (
+                <TextField {...params} />
+              )}
+            </>
+          )}
         />
       </LocalizationProvider>
-      {errors[element.name] && <p>{errors[element.name]?.message}</p>}
     </>
   );
 };

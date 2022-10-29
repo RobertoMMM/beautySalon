@@ -4,7 +4,7 @@ import { Token } from "./types";
 interface Login {
   email: string;
   password: string;
-  userName: string;
+  username: string;
 }
 
 interface OrderStepsPages {

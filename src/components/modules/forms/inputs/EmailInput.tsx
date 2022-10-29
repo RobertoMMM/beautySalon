@@ -1,19 +1,24 @@
 import { TextField } from "@mui/material";
 
-const EmailInput = ({ element, register }: any) => {
+const EmailInput = ({ element, register, errors }: any) => {
   const { label, name, placeholder } = element;
+
+  const params = {
+    type: "email",
+    name,
+    placeholder,
+    id: "demo-helper-text-aligned",
+    label,
+    ...register(name, { ...element.register }),
+  };
 
   return (
     <div>
-      <TextField
-        type="email"
-        name={name}
-        placeholder={placeholder}
-        id="demo-helper-text-aligned"
-        label={label}
-        sx={{ width: 600 }}
-        {...register(name, { ...element.register })}
-      />
+      {errors[name] ? (
+        <TextField {...params} error sx={{ width: 600 }} />
+      ) : (
+        <TextField {...params} sx={{ width: 600 }} />
+      )}
     </div>
   );
 };

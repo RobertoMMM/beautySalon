@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const SelectInput = ({ element, register, control }: any) => {
+const SelectInput = ({ element, register, control, errors }: any) => {
   const { label, name, options } = element;
 
   return (
@@ -22,7 +22,15 @@ const SelectInput = ({ element, register, control }: any) => {
             isOptionEqualToValue={(option: any, value: any) =>
               option.id === value.id
             }
-            renderInput={(params) => <TextField {...params} label={label} />}
+            renderInput={(params) => (
+              <>
+                {errors[name] ? (
+                  <TextField error {...params} label={label} />
+                ) : (
+                  <TextField {...params} label={label} />
+                )}
+              </>
+            )}
           />
         )}
       />
