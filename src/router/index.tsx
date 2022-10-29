@@ -4,7 +4,7 @@ import { setToken, setUserEmail, setUserName } from "features/auth/authSlice";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 import { getCookie } from "utils/cookie";
-import { COOKIE_USER_DATA } from "ts/enums";
+import { COOKIE_USER_DATA } from "ts/constants";
 
 const CustomRouter = () => {
   const [pending, setPending] = useState(true);

@@ -1,5 +1,5 @@
 import { saveCookie } from "utils/cookie";
-import { COOKIE_USER_DATA, SERVER_URL } from "ts/enums";
+import { COOKIE_USER_DATA, SERVER_URL } from "ts/constants";
 import { Login } from "ts/interfaces";
 import { HTTP } from "utils/api";
 

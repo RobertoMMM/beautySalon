@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TOTAL_STEPS } from "ts/enums";
+import { TOTAL_STEPS } from "ts/constants";
 import { Box } from "@mui/material";
 
 const NewOrderHeader: FC<{ idStep: number; description: string }> = ({

@@ -1,6 +1,5 @@
 import LoginPage from "pages/login/index";
 import OrdersPage from "pages/orders/orders";
-import Redirect from "components/ProtectedRoute/Redirect";
 import { OrderRoutes } from "./modules/order";
 import Home from "pages/home/homePage";
 import HelpPage from "pages/help/helpPage";

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import arrowImage from "assets/dropdown.png";
 import CustomButton from "components/modules/button";
-import { Box, List, ListItem } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import { useAppSelector } from "app/store";
 import { getRegisterClientInfo } from "features/client/clientSlice";
 import { getRegisterServicesInfo } from "features/services/servicesSlice";
