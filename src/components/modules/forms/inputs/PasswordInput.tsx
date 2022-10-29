@@ -1,17 +1,20 @@
-const PasswordInput = ({ element, register, errors }: any) => {
-  const { label, type, name, placeholder } = element;
+import { TextField } from "@mui/material";
+
+const PasswordInput = ({ element, register }: any) => {
+  const { label, name, placeholder } = element;
 
   return (
-    <div>
-      <label>{label}</label>
-      <input
-        type={type}
+    <>
+      <TextField
+        type="password"
         name={name}
         placeholder={placeholder}
+        id="demo-helper-text-aligned"
+        label={label}
+        sx={{ width: 600 }}
         {...register(name, { ...element.register })}
       />
-      {errors[name] && <p>{errors[name]?.message}</p>}
-    </div>
+    </>
   );
 };
 

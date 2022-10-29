@@ -4,19 +4,13 @@ import { Token } from "./types";
 interface Login {
   email: string;
   password: string;
+  userName: string;
 }
 
 interface OrderStepsPages {
   idStep: number;
   description: string;
   content: ReactElement;
-}
-
-interface Authentication {
-  token: Token;
-  setToken: (newToken: string) => void;
-  onLogin: ({ email, password }: Login) => void;
-  onLogout: () => void;
 }
 
 interface Client {
@@ -26,18 +20,14 @@ interface Client {
   comments: string;
 }
 
-interface SelectInput {
-  label: string;
-  value: string;
-}
 interface Service {
-  serviceCategory: SelectInput;
-  service: SelectInput;
-  masters: SelectInput;
+  serviceCategory: string;
+  service: string;
+  masters: string;
   date: string;
   time: string;
   price: string;
-  currency: SelectInput;
+  currency: string;
 }
 
 interface ClientInformation {
@@ -47,11 +37,4 @@ interface ClientInformation {
   comments: string;
 }
 
-export type {
-  Login,
-  Authentication,
-  OrderStepsPages,
-  Client,
-  Service,
-  ClientInformation,
-};
+export type { Login, OrderStepsPages, Client, Service, ClientInformation };

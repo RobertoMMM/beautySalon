@@ -1,12 +1,16 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import CustomButton from "components/modules/button";
 import FormInputs from "components/modules/forms/FormInputs";
-import useAuth from "hooks/useAuth";
 import formModel from "static/loginFormInputs.json";
 import { Login } from "ts/interfaces";
+import { onLogin } from "features/auth/authSlice";
+import { useAppDispatch } from "app/store";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const { onLogin } = useAuth();
+  const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
 
   const {
     register,
@@ -15,7 +19,11 @@ const LoginPage = () => {
   } = useForm<Login>();
 
   const onSubmit: SubmitHandler<Login> = ({ email, password }) => {
-    onLogin({ email, password });
+    const userName = email.slice(0, 2);
+
+    dispatch(onLogin({ email, password, userName }));
+
+    navigate("/");
   };
   return (
     <div>

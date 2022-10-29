@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 
-const SelectInput = ({ element, register, errors, control }: any) => {
+const SelectInput = ({ element, register, control }: any) => {
   const { label, name, options } = element;
 
   return (
@@ -26,7 +26,6 @@ const SelectInput = ({ element, register, errors, control }: any) => {
           />
         )}
       />
-      {errors[element.name] && <p>{errors[element.name]?.message}</p>}
     </>
   );
 };

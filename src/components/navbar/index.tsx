@@ -3,7 +3,10 @@ import womenImage from "assets/women.png";
 import dropdownImage from "assets/dropdown.png";
 import "./style.css";
 import CustomButton from "../modules/button";
-import useAuth from "hooks/useAuth";
+import { useAppDispatch } from "app/store";
+import { getUserName, onLogout } from "features/auth/authSlice";
+import { AppBar } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const CustomLink = ({ to, title }: { to: string; title: string }) => {
   return (
@@ -17,32 +20,52 @@ const CustomLink = ({ to, title }: { to: string; title: string }) => {
 };
 
 const Layout = () => {
-  const { onLogout } = useAuth();
+  const dispatch = useAppDispatch();
+
+  const navStyles = {
+    height: "90px",
+    background: "#ffffff",
+    left: "0",
+    top: "0",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "1rem",
+    zIndex: "2",
+    color: "rgba(0, 0, 0, 0.6)",
+  };
 
   const Navbar = () => {
+    const userName = useSelector(getUserName) || "UK";
+
     return (
-      <nav className="navbar">
-        <img src={womenImage} alt="beautySalon" />
-        <div className="title">
-          <div className="main">PowerBeauty</div>
-          <div className="secondary">Beauty is our duty</div>
-        </div>
-        <div className="utils">
-          <CustomLink to="help" title="Help" />
-          <CustomLink to="orders" title="Orders" />
-          <div className="breakLine"></div>
-          <div className="userProfile">RF</div>
-          <div className="registration">Salon Registration</div>
-          <div className="dropdown">
-            <img src={dropdownImage} alt="dropdown" />
-            <div className="dropdownContent">
-              <CustomLink to="login" title="Login" />
-              <CustomLink to="order/1" title="Order" />
-              <CustomButton onClick={onLogout}>Sign out</CustomButton>
+      <>
+        <AppBar sx={navStyles} position="fixed">
+          <img src={womenImage} alt="beautySalon" />
+          <div className="title">
+            <div className="main">PowerBeauty</div>
+            <div className="secondary">Beauty is our duty</div>
+          </div>
+          <div className="utils">
+            <CustomLink to="help" title="Help" />
+            <CustomLink to="orders" title="Orders" />
+            <div className="breakLine"></div>
+            <div className="userProfile">{userName}</div>
+            <div className="registration">Salon Registration</div>
+            <div className="dropdown">
+              <img src={dropdownImage} alt="dropdown" />
+              <div className="dropdownContent">
+                <CustomLink to="login" title="Login" />
+                <CustomLink to="order/1" title="Order" />
+                <CustomButton onClick={() => dispatch(onLogout())}>
+                  Sign out
+                </CustomButton>
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </AppBar>
+      </>
     );
   };
 

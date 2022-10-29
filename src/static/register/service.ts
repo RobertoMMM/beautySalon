@@ -106,20 +106,14 @@ const formModel = [
     type: "number",
     name: "price",
     label: "Price",
-    placeholder: "Ex: 1000$",
     register: {
       required: "Price is required",
-      min: 1,
-      minLength: {
-        value: 1,
-        message: "Invalid Price",
-      },
     },
   },
   {
     type: "select",
     name: "currency",
-    label: "",
+    label: "Currency",
     options: currencyOptions,
     register: {
       required: "Please, choose currency",

@@ -1,3 +1,4 @@
+import ProtectedRoute from "components/ProtectedRoute";
 import OrderStepsGenerator from "pages/order/order";
 import ClientInfoPage from "pages/order/steps/clientInfoPage";
 import FinishOrderPage from "pages/order/steps/finishOrderPage";
@@ -22,10 +23,10 @@ const stepsDetails = [
 ];
 
 const OrderRoutes = stepsDetails.map((details) => {
+  const stepPage = <OrderStepsGenerator details={details} />;
   return {
     path: `order/${details.idStep}`,
-    element: <OrderStepsGenerator details={details} />,
-    isProtected: true,
+    element: <ProtectedRoute element={stepPage} />,
   };
 });
 

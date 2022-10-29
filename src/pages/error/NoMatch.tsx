@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+import CustomButton from "components/modules/button";
 import { useNavigate } from "react-router-dom";
 
 const NoMatch = () => {
@@ -7,14 +9,19 @@ const NoMatch = () => {
     navigate("/");
   };
 
+  const styles = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 5,
+  };
+
   return (
-    <div style={{ position: "relative", top: "200px" }}>
-      <div>NoMatch</div>
+    <Box sx={styles}>
+      <Box>NoMatch</Box>
       <br />
-      <button style={{ width: "140px" }} onClick={redirect}>
-        Go Home
-      </button>
-    </div>
+      <CustomButton onClick={redirect}>Go Home</CustomButton>
+    </Box>
   );
 };
 

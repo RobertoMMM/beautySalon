@@ -5,11 +5,13 @@ import { ClientInformation } from "ts/interfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputs from "components/modules/forms/FormInputs";
 import formModel from "static/register/clientInformation.json";
-import useRegisterClient from "hooks/useClientInformation";
+import { useAppDispatch } from "app/store";
+import { setClientInfo } from "features/client/clientSlice";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();
-  const { setClient } = useRegisterClient();
+
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -18,8 +20,8 @@ const ClientInfoPage = () => {
     control,
   } = useForm<ClientInformation>();
 
-  const onSubmit: SubmitHandler<ClientInformation> = (data) => {
-    setClient(data);
+  const onSubmit: SubmitHandler<ClientInformation> = (clientInfo) => {
+    dispatch(setClientInfo(clientInfo));
     navigate("/order/3");
   };
 

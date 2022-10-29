@@ -1,15 +1,16 @@
 import arrowImage from "../../../assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
-import useRegisterService from "../../../hooks/useService";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Service } from "../../../ts/interfaces";
 import FormInputs from "../../../components/modules/forms/FormInputs";
 import formModel from "../../../static/register/service";
 import CustomButton from "../../../components/modules/button";
+import { useAppDispatch } from "app/store";
+import { setServicesInfo } from "features/services/servicesSlice";
 
 const SelectServicePage = () => {
   const navigate = useNavigate();
-  const { setService } = useRegisterService();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -18,10 +19,8 @@ const SelectServicePage = () => {
     control,
   } = useForm<Service>();
 
-  const onSubmit: SubmitHandler<Service> = (data) => {
-    console.log(data);
-
-    setService(data);
+  const onSubmit: SubmitHandler<Service> = (servicesInfo) => {
+    dispatch(setServicesInfo(servicesInfo));
     navigate("/order/2");
   };
 

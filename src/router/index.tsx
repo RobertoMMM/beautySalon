@@ -1,31 +1,28 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import ProtectedRoute from "components/ProtectedRoute/index";
-import { ROUTES } from "./routes";
-import MainProvider from "context/MainProvider";
-import Layout from "components/navbar";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "app/store";
+import { setToken, setUserName } from "features/auth/authSlice";
+import { onAuthStateChanged } from "firebaseConfig";
+import { auth } from "firebaseConfig";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes";
 
-const MainRouter = () => {
-  return (
-    <BrowserRouter>
-      <MainProvider>
-        <Routes>
-          <Route element={<Layout />}>
-            {ROUTES.map(({ path, element, isProtected }) => {
-              return isProtected ? (
-                <Route
-                  key={path}
-                  path={`/${path}`}
-                  element={<ProtectedRoute element={element} />}
-                />
-              ) : (
-                <Route key={path} path={`/${path}`} element={element} />
-              );
-            })}
-          </Route>
-        </Routes>
-      </MainProvider>
-    </BrowserRouter>
-  );
+const CustomRouter = () => {
+  const [pending, setPending] = useState(true);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const token = await user.getIdToken();
+        const userName = user.email?.slice(0, 2);
+
+        dispatch(setToken(token));
+        dispatch(setUserName(userName as string));
+      }
+      setPending(false);
+    });
+  }, []);
+  return <>{pending ? <>Loading...</> : <RouterProvider router={router} />}</>;
 };
 
-export default MainRouter;
+export default CustomRouter;

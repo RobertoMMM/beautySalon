@@ -4,19 +4,22 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 const DateInput = ({ element, register }: any) => {
-  const { name } = element;
+  const { name, label } = element;
+
+  const currentDate = new Date();
 
   return (
-    <div>
+    <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           {...register(name, { ...element.register })}
           onChange={() => {}}
-          label="Basic example"
+          label={label}
+          minDate={currentDate}
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-    </div>
+    </>
   );
 };
 

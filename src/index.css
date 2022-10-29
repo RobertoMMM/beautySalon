@@ -19,19 +19,6 @@ form {
   transform: translateX(-50%);
   top: 267px;
   display: grid;
-  grid-template-columns: 1fr;
-  row-gap: 69px;
-  place-content: center;
-  width: 610px;
-}
-
-.specialAling {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 267px;
-  display: grid;
-  grid-template-columns: 1fr;
   row-gap: 69px;
   place-content: center;
   width: 610px;

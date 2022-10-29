@@ -3,20 +3,21 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 
-const TimeInput = ({ element, register }: any) => {
-  const { name } = element;
+const TimeInput = ({ element, register, errors }: any) => {
+  const { name, label } = element;
 
   return (
-    <div>
+    <>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TimePicker
           {...register(name, { ...element.register })}
           onChange={() => {}}
-          label="Basic example"
+          label={label}
           renderInput={(params) => <TextField {...params} />}
         />
       </LocalizationProvider>
-    </div>
+      {errors[element.name] && <p>{errors[element.name]?.message}</p>}
+    </>
   );
 };
 

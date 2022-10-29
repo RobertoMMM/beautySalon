@@ -1,41 +1,79 @@
 import { useNavigate } from "react-router-dom";
 import arrowImage from "assets/dropdown.png";
 import CustomButton from "components/modules/button";
-import useRegisterClient from "hooks/useClientInformation";
-import useRegisterService from "hooks/useService";
-import { List, ListItem, Divider } from "@mui/material";
+import { Box, List, ListItem } from "@mui/material";
+import { useAppSelector } from "app/store";
+import { getRegisterClientInfo } from "features/client/clientSlice";
+import { getRegisterServicesInfo } from "features/services/servicesSlice";
+import OrderPopUp from "components/modules/popUp/order";
+import { useState } from "react";
 
 const FinishOrderPage = () => {
+  const [isPopActive, setIsPopUpActive] = useState(false);
   const navigate = useNavigate();
-  const { client } = useRegisterClient();
-  const { service } = useRegisterService();
+  const client = useAppSelector(getRegisterClientInfo);
+  const services = useAppSelector(getRegisterServicesInfo);
 
   const { comments, email, name, phone } = client;
-  const { date, masters, price, serviceCategory, time, currency } = service;
+  const { date, masters, price, serviceCategory, time, currency } = services;
+
+  const listStyles = {
+    width: "579px",
+  };
+
+  const listItemsStyles = {
+    marginBottom: "50px",
+    display: "flex",
+    justifyContent: "space-between",
+    "& div": {
+      fontSize: "23px",
+      fontWeight: "bold",
+    },
+    "& span": {
+      fontSize: "25px",
+    },
+  };
 
   return (
     <form>
-      <List>
-        <ListItem>Service {serviceCategory?.label}</ListItem>
-        <Divider />
-        <ListItem>Master {masters?.label}</ListItem>
-        <Divider />
-        <ListItem>
-          Date/Time {date} {time}
-        </ListItem>
-        <Divider />
-        <ListItem>
-          Price {price} {currency?.label}
-        </ListItem>
-        <Divider />
-        <ListItem>Client name {name}</ListItem>
-        <Divider />
-        <ListItem>Client phone {phone}</ListItem>
-        <Divider />
-        <ListItem>Client email {email}</ListItem>
-        <Divider />
-        {comments && <ListItem>Comments {comments}</ListItem>}
-      </List>
+      {isPopActive ? (
+        <OrderPopUp />
+      ) : (
+        <List sx={listStyles}>
+          <ListItem sx={listItemsStyles}>
+            <div>Service</div> <span>{serviceCategory}</span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Master</div> <span>{masters}</span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Date/Time</div>
+            <span>
+              {date} {time}
+            </span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Price</div>
+            <span>
+              {price} {currency}
+            </span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Client name</div> <span>{name}</span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Client phone</div> <span>{phone}</span>
+          </ListItem>
+          <ListItem sx={listItemsStyles}>
+            <div>Client email</div> <span>{email}</span>
+          </ListItem>
+          {comments && (
+            <ListItem sx={listItemsStyles}>
+              <div>Comments</div> <span>{comments}</span>
+            </ListItem>
+          )}
+        </List>
+      )}
       <CustomButton onClick={() => navigate("/order/2")}>
         <img
           style={{ transform: "rotate(90deg)" }}
@@ -44,7 +82,7 @@ const FinishOrderPage = () => {
         />
         Back
       </CustomButton>
-      <CustomButton onClick={() => alert("button will do nothing")}>
+      <CustomButton onClick={() => setIsPopUpActive(true)}>
         Create Order
       </CustomButton>
     </form>

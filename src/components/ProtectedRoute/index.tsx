@@ -1,11 +1,13 @@
+import { useAppSelector } from "app/store";
+import { getUserToken } from "features/auth/authSlice";
 import { Navigate } from "react-router-dom";
-import useAuth from "hooks/useAuth";
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {
-  const { token } = useAuth();
+  const token = useAppSelector(getUserToken);
 
   if (!token) {
-    return <Navigate to="/home" replace={true} />;
+    alert("Please login first");
+    return <Navigate to="/" replace={true} />;
   }
 
   return element;
