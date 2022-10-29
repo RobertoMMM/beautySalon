@@ -18,9 +18,7 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm<Login>();
 
-  const onSubmit: SubmitHandler<Login> = ({ email, password }) => {
-    const userName = email.slice(0, 2);
-
+  const onSubmit: SubmitHandler<Login> = ({ email, password, userName }) => {
     dispatch(onLogin({ email, password, userName }));
 
     navigate("/");

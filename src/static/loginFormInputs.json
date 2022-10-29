@@ -1,5 +1,14 @@
 [
   {
+    "type": "text",
+    "name": "userName",
+    "label": "User Name",
+    "placeholder": "bobby#123",
+    "register": {
+      "required": "Username is required"
+    }
+  },
+  {
     "type": "email",
     "name": "email",
     "label": "Email",
