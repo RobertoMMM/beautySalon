@@ -1,5 +1,4 @@
 import { ReactElement } from "react";
-import { Token } from "./types";
 
 interface Login {
   email: string;

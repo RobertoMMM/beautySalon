@@ -1,5 +1,15 @@
-import { Autocomplete, TextField } from "@mui/material";
+import { Autocomplete, styled, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+
+const StyledAutcomplete = styled(Autocomplete)(() => ({
+  '.MuiAutocomplete-input': {
+    // backgroundColor: 'red',
+  },
+  '.icon': {
+    marginLeft: ''
+  }
+}))
 
 const SelectInput = ({ element, register, control, errors }: any) => {
   const { label, name, options } = element;
@@ -10,8 +20,10 @@ const SelectInput = ({ element, register, control, errors }: any) => {
         name={name}
         control={control}
         render={({ field: { onChange } }) => (
-          <Autocomplete
+          <StyledAutcomplete
+            bgcolor={'red'}
             name={name}
+            popupIcon={<KeyboardArrowDownRoundedIcon className={'icon'} />}
             {...register(name, { ...element.register })}
             id="combo-box-demo"
             options={options}

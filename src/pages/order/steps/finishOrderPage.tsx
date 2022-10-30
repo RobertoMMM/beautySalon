@@ -7,6 +7,8 @@ import { getRegisterClientInfo } from "features/client/clientSlice";
 import { getRegisterServicesInfo } from "features/services/servicesSlice";
 import OrderPopUp from "components/modules/popUp/order";
 import { useState } from "react";
+import { saveCookie } from "utils/cookie";
+import { COOKIE_USER_ORDER } from "ts/constants";
 
 const FinishOrderPage = () => {
   const [isPopActive, setIsPopUpActive] = useState(false);
@@ -16,6 +18,19 @@ const FinishOrderPage = () => {
 
   const { comments, email, name, phone } = client;
   const { date, masters, price, serviceCategory, time, currency } = services;
+
+  saveCookie(COOKIE_USER_ORDER, {
+    comments,
+    email,
+    name,
+    phone,
+    date,
+    masters,
+    price,
+    serviceCategory,
+    time,
+    currency,
+  });
 
   const listStyles = {
     width: "579px",
