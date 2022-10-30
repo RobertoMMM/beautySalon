@@ -12,12 +12,7 @@ const SelectServicePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<Service>();
+  const { register, handleSubmit, control } = useForm<Service>();
 
   const onSubmit: SubmitHandler<Service> = (servicesInfo) => {
     dispatch(setServicesInfo(servicesInfo));
@@ -32,7 +27,6 @@ const SelectServicePage = () => {
             key={element.name}
             element={element}
             register={register}
-            errors={errors}
             control={control}
           />
         ))}

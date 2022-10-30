@@ -1,18 +1,38 @@
 import { Autocomplete, styled, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
-import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const StyledAutcomplete = styled(Autocomplete)(() => ({
-  '.MuiAutocomplete-input': {
-    // backgroundColor: 'red',
+  ".MuiAutocomplete-inputRoot": {
+    width: "100%",
+    height: "100%",
+    background: "#FAFAFA",
+    borderRadius: "20px",
+    outline: "none",
   },
-  '.icon': {
-    marginLeft: ''
-  }
-}))
+  ".MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+  "label.Mui-focused": {
+    color: "rgba(0, 0, 0, 0.96)",
+  },
+  ".MuiAutocomplete-popupIndicator": {
+    position: "absolute",
+    right: "-50px",
+  },
+  ".MuiAutocomplete-clearIndicator": {
+    position: "absolute",
+    right: "10px",
+  },
+  ".icon": {
+    fontSize: "32px",
+    color: "rgba(0, 0, 0, 0.96)",
+  },
+}));
 
-const SelectInput = ({ element, register, control, errors }: any) => {
-  const { label, name, options } = element;
+const SelectInput = ({ element, register, control }: any) => {
+  const { label, name, options, placeholder } = element;
 
   return (
     <>
@@ -21,27 +41,20 @@ const SelectInput = ({ element, register, control, errors }: any) => {
         control={control}
         render={({ field: { onChange } }) => (
           <StyledAutcomplete
-            bgcolor={'red'}
             name={name}
-            popupIcon={<KeyboardArrowDownRoundedIcon className={'icon'} />}
+            forcePopupIcon={true}
+            popupIcon={<KeyboardArrowDownRoundedIcon className="icon" />}
             {...register(name, { ...element.register })}
-            id="combo-box-demo"
             options={options}
             onChange={(_, data: any) => {
               return onChange(data?.value);
             }}
-            sx={{ width: 600 }}
+            clearIcon={<ClearIcon fontSize="small" />}
             isOptionEqualToValue={(option: any, value: any) =>
               option.id === value.id
             }
             renderInput={(params) => (
-              <>
-                {errors[name] ? (
-                  <TextField error {...params} label={label} />
-                ) : (
-                  <TextField {...params} label={label} />
-                )}
-              </>
+              <TextField {...params} label={label} placeholder={placeholder} />
             )}
           />
         )}

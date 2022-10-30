@@ -1,6 +1,23 @@
+import styled from "@emotion/styled";
 import { TextField } from "@mui/material";
 
-const EmailInput = ({ element, register, errors }: any) => {
+const StyledTextField = styled(TextField)(() => ({
+  ".MuiOutlinedInput-root": {
+    width: "100%",
+    height: "100%",
+    background: "#FAFAFA",
+    borderRadius: "20px",
+    outline: "none",
+  },
+  ".MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+  "label.Mui-focused": {
+    color: "rgba(0, 0, 0, 0.96)",
+  },
+}));
+
+const EmailInput = ({ element, register }: any) => {
   const { label, name, placeholder } = element;
 
   const params = {
@@ -12,15 +29,7 @@ const EmailInput = ({ element, register, errors }: any) => {
     ...register(name, { ...element.register }),
   };
 
-  return (
-    <div>
-      {errors[name] ? (
-        <TextField {...params} error sx={{ width: 600 }} />
-      ) : (
-        <TextField {...params} sx={{ width: 600 }} />
-      )}
-    </div>
-  );
+  return <StyledTextField {...params} />;
 };
 
 export default EmailInput;

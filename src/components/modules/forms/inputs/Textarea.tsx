@@ -4,20 +4,18 @@ const TextareaInput = ({ element, register }: any) => {
   const { name, placeholder } = element;
 
   const textareaStyles = {
-    width: "579px",
+    width: "100%",
     height: "138px",
   };
 
   return (
-    <div>
-      <Textarea
-        name={name}
-        minRows={2}
-        placeholder={placeholder}
-        sx={textareaStyles}
-        {...register(name, { ...element.register })}
-      />
-    </div>
+    <Textarea
+      name={name}
+      minRows={2}
+      placeholder={placeholder}
+      sx={textareaStyles}
+      {...register(name, { ...element.register })}
+    />
   );
 };
 

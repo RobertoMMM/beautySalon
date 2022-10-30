@@ -17,7 +17,8 @@ const FinishOrderPage = () => {
   const services = useAppSelector(getRegisterServicesInfo);
 
   const { comments, email, name, phone } = client;
-  const { date, masters, price, serviceCategory, time, currency } = services;
+  const { date, masters, price, serviceCategory, timeTo, timeFrom, currency } =
+    services;
 
   saveCookie(COOKIE_USER_ORDER, {
     comments,
@@ -28,7 +29,8 @@ const FinishOrderPage = () => {
     masters,
     price,
     serviceCategory,
-    time,
+    timeFrom,
+    timeTo,
     currency,
   });
 
@@ -46,6 +48,7 @@ const FinishOrderPage = () => {
     },
     "& span": {
       fontSize: "25px",
+      whiteSpace: "nowrap",
     },
   };
 
@@ -64,7 +67,7 @@ const FinishOrderPage = () => {
           <ListItem sx={listItemsStyles}>
             <div>Date/Time</div>
             <span>
-              {date} {time}
+              {date} {timeFrom} - {timeTo}
             </span>
           </ListItem>
           <ListItem sx={listItemsStyles}>

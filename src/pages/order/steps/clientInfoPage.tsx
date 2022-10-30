@@ -17,12 +17,7 @@ const ClientInfoPage = () => {
   const email = useAppSelector(getUserEmail);
   const name = useAppSelector(getUserName);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm<ClientInformation>({
+  const { register, handleSubmit, control } = useForm<ClientInformation>({
     defaultValues: {
       email,
       name,
@@ -43,7 +38,6 @@ const ClientInfoPage = () => {
             key={element.name}
             element={element}
             register={register}
-            errors={errors}
             control={control}
           />
         ))}

@@ -12,11 +12,7 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Login>();
+  const { register, handleSubmit } = useForm<Login>();
 
   const onSubmit: SubmitHandler<Login> = async ({
     email,
@@ -28,19 +24,18 @@ const LoginPage = () => {
     navigate("/");
   };
   return (
-    <div>
+    <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {loginForm.map((element) => (
           <FormInputs
             key={element.name}
             element={element}
             register={register}
-            errors={errors}
           />
         ))}
         <CustomButton type="submit">Let's Start</CustomButton>
       </form>
-    </div>
+    </>
   );
 };
 

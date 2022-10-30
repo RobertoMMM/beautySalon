@@ -24,7 +24,8 @@ interface Service {
   service: string;
   masters: string;
   date: string;
-  time: string;
+  timeFrom: string;
+  timeTo: string;
   price: string;
   currency: string;
 }

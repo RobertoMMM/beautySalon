@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f5f5f5;
+  background: #ebe8ec;
 }
 
 code {
@@ -21,20 +21,9 @@ form {
   display: grid;
   row-gap: 69px;
   place-content: center;
-  width: 610px;
+  width: 579px;
 }
 
-select,
-input {
-  right: 0;
-  width: 578px;
-  height: 48px;
-  background: #fafafa;
-  border-radius: 20px;
-  padding-left: 8px;
-  font-size: 16px;
-  line-height: 24px;
-  letter-spacing: -0.03em;
-  color: rgba(0, 0, 0, 0.38);
-  border: none;
+form div {
+  width: 579px;
 }

@@ -64,6 +64,7 @@ const formModel = [
     name: "serviceCategory",
     label: "Service Category",
     options: serviceCategoryOptions,
+    placeholder: "Select from list",
     register: {
       required: "This field is required",
     },
@@ -73,6 +74,7 @@ const formModel = [
     name: "service",
     label: "Service",
     options: serviceOptions,
+    placeholder: "Select from list",
     register: {
       required: "This field is required",
     },
@@ -82,29 +84,52 @@ const formModel = [
     name: "masters",
     label: "Masters",
     options: mastersOptions,
+    placeholder: "Select from list",
     register: {
       required: "Please, choose a master",
     },
   },
   {
-    type: "date",
+    type: "text",
     name: "date",
     label: "Date",
+    placeholder: "12.07.2022",
     register: {
       required: "Date is required",
+      pattern: {
+        value:
+          /(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[13-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})/,
+      },
     },
   },
   {
-    type: "time",
-    name: "time",
-    label: "Time",
+    type: "text",
+    name: "timeFrom",
+    label: "Time From",
+    placeholder: "15:45",
     register: {
       required: "Please, choose a time",
+      pattern: {
+        value: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+      },
+    },
+  },
+  {
+    type: "text",
+    name: "timeTo",
+    label: "Time To",
+    placeholder: "17:00",
+    register: {
+      required: "Please, choose a time",
+      pattern: {
+        value: /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+      },
     },
   },
   {
     type: "number",
     name: "price",
+    placeholder: "1234.50",
     label: "Price",
     register: {
       required: "Price is required",
