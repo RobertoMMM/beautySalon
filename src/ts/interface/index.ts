@@ -1,15 +1,7 @@
-import { ReactElement } from "react";
-
 interface Login {
   email: string;
   password: string;
   username: string;
-}
-
-interface OrderStepsPages {
-  idStep: number;
-  description: string;
-  content: ReactElement;
 }
 
 interface Client {
@@ -37,4 +29,4 @@ interface ClientInformation {
   comments: string;
 }
 
-export type { Login, OrderStepsPages, Client, Service, ClientInformation };
+export type { Login, Client, Service, ClientInformation };

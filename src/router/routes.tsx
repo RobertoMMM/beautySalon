@@ -1,12 +1,12 @@
 import LoginPage from "pages/login/index";
-import OrdersPage from "pages/orders/orders";
-import { OrderRoutes } from "./modules/order";
-import Home from "pages/home/homePage";
-import HelpPage from "pages/help/helpPage";
-import NoMatch from "pages/error/noMatch";
+import OrdersPage from "pages/orders";
+import Home from "pages/home";
+import HelpPage from "pages/help";
+import NoMatch from "pages/error/404";
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "components/ProtectedRoute";
 import Layout from "components/navbar";
+import OrderStepsGenerator from "pages/order";
 
 const routes = [
   {
@@ -30,10 +30,13 @@ const routes = [
         element: <ProtectedRoute element={<OrdersPage />} />,
       },
       {
+        path: "order/:id",
+        element: <OrderStepsGenerator />,
+      },
+      {
         path: "*",
         element: <NoMatch />,
       },
-      ...OrderRoutes,
     ],
   },
 ];

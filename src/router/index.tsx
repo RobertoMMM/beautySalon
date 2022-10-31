@@ -4,14 +4,13 @@ import { setToken, setUserEmail, setUserName } from "store/slices/auth";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 import { getCookie } from "utils/cookie";
-import { COOKIE_USER_DATA } from "constants/index";
 
 const CustomRouter = () => {
   const [pending, setPending] = useState(true);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const data = getCookie(COOKIE_USER_DATA);
+    const data = getCookie("userToken");
 
     if (data) {
       const { token, username, email } = JSON.parse(data);
@@ -24,7 +23,8 @@ const CustomRouter = () => {
     }
     setPending(false);
   }, []);
-  return <>{pending ? <>Loading...</> : <RouterProvider router={router} />}</>;
+
+  return pending ? <>Loading...</> : <RouterProvider router={router} />;
 };
 
 export default CustomRouter;

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import CustomButton from "components/modules/button";
+import CustomButton from "components/common/button";
 import { useNavigate } from "react-router-dom";
 
 const NoMatch = () => {

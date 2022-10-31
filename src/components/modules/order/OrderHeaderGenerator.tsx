@@ -1,12 +1,13 @@
 import { FC } from "react";
-import { TOTAL_STEPS } from "constants/index";
 import { Box } from "@mui/material";
 
-const NewOrderHeader: FC<{ idStep: number; description: string }> = ({
-  idStep,
+const TOTAL_STEPS = 3;
+
+const NewOrderHeader: FC<{ id: number; description: string }> = ({
+  id,
   description,
 }) => {
-  const stepText = `Step ${idStep}/${TOTAL_STEPS} - ${description}`;
+  const stepText = `Step ${id}/${TOTAL_STEPS} - ${description}`;
 
   const boxStyles = {
     display: "flex",

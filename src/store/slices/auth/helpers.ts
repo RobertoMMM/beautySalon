@@ -1,10 +1,10 @@
 import { saveCookie } from "utils/cookie";
-import { COOKIE_USER_DATA, SERVER_URL } from "constants/index";
-import { Login } from "ts/interfaces";
+import { Login } from "ts/interface";
 import { HTTP } from "utils/api";
+import { API } from "constants/index";
 
 const createNewAccount = async ({ email, password, username }: Login) => {
-  const URL = `${SERVER_URL}/api/auth/local/register`;
+  const URL = `${API}/api/auth/local/register`;
 
   const { user, jwt } = await HTTP.post(URL, {
     username,
@@ -15,7 +15,7 @@ const createNewAccount = async ({ email, password, username }: Login) => {
   const userEmail = user.email;
   const userToken = jwt;
 
-  saveCookie(COOKIE_USER_DATA, {
+  saveCookie("userToken", {
     token: jwt,
     email: userEmail,
     username,
@@ -25,7 +25,7 @@ const createNewAccount = async ({ email, password, username }: Login) => {
 };
 
 const signIn = async ({ username, password }: Login) => {
-  const URL = `${SERVER_URL}/api/auth/local`;
+  const URL = `${API}/api/auth/local`;
 
   const { user, jwt } = await HTTP.post(URL, {
     identifier: username,
@@ -35,7 +35,7 @@ const signIn = async ({ username, password }: Login) => {
   const userEmail = user.email;
   const userToken = jwt;
 
-  saveCookie(COOKIE_USER_DATA, {
+  saveCookie("userToken", {
     token: jwt,
     email: userEmail,
     username,

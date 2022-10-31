@@ -1,19 +1,22 @@
+import { styled } from "@mui/joy";
 import Textarea from "@mui/joy/Textarea";
+
+const StyledTextarea = styled(Textarea)(() => ({
+  width: "100%",
+  height: "138px",
+  background: "#FAFAFA",
+  borderRadius: "20px",
+  border: "none",
+}));
 
 const TextareaInput = ({ element, register }: any) => {
   const { name, placeholder } = element;
 
-  const textareaStyles = {
-    width: "100%",
-    height: "138px",
-  };
-
   return (
-    <Textarea
+    <StyledTextarea
       name={name}
       minRows={2}
       placeholder={placeholder}
-      sx={textareaStyles}
       {...register(name, { ...element.register })}
     />
   );

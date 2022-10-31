@@ -1,4 +1,4 @@
-import { Client } from "ts/interfaces";
+import { Client } from "ts/interface";
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
 

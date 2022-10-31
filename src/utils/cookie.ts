@@ -1,4 +1,3 @@
-import { COOKIE_USER_DATA } from "constants/index";
 import Cookies from "js-cookie";
 
 const saveCookie = (name: string, newValue: any) => {
@@ -9,8 +8,8 @@ const getCookie = (name: string) => {
   return Cookies.get(name) || null;
 };
 
-const clearUserDataCookie = () => {
-  return Cookies.remove(COOKIE_USER_DATA);
+const clearCookie = (name: string) => {
+  return Cookies.remove(name);
 };
 
-export { saveCookie, getCookie, clearUserDataCookie };
+export { saveCookie, getCookie, clearCookie };

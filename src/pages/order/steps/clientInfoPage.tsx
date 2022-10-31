@@ -1,16 +1,14 @@
 import arrowImage from "assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "components/modules/button";
-import { ClientInformation } from "ts/interfaces";
+import { ClientInformation } from "ts/interface";
 import { SubmitHandler, useForm } from "react-hook-form";
-import FormInputs from "components/modules/forms/FormInputs";
+import FormInputs from "components/common/forms/FormInputs";
 import { clientForm } from "static/register/clientInformation";
 import { useAppDispatch, useAppSelector } from "store";
 import { setClientInfo } from "store/slices/client";
 import { getUserEmail, getUserName } from "store/slices/auth";
 import { Box } from "@mui/system";
-import { LocalStorage } from "utils/localStorage";
-import { LOCAL_STORAGE_CLIENT } from "constants/index";
+import CustomButton from "components/common/button";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();
@@ -20,20 +18,22 @@ const ClientInfoPage = () => {
   const email = useAppSelector(getUserEmail);
   const name = useAppSelector(getUserName);
 
-  const LocalStorageClient = LocalStorage.get(LOCAL_STORAGE_CLIENT);
+  const LocalStorageClientData = JSON.parse(
+    localStorage.getItem("client") || "{}"
+  );
 
   const { register, handleSubmit, control } = useForm<ClientInformation>({
     defaultValues: {
-      email: LocalStorageClient?.email || email,
-      name: LocalStorageClient?.name || name,
-      phone: LocalStorageClient?.phone,
+      email: LocalStorageClientData?.email || email,
+      name: LocalStorageClientData?.name || name,
+      phone: LocalStorageClientData?.phone,
     },
   });
 
   const onSubmit: SubmitHandler<ClientInformation> = (clientInfo) => {
     if (!clientInfo) return;
 
-    LocalStorage.set(LOCAL_STORAGE_CLIENT, clientInfo);
+    localStorage.setItem("client", JSON.stringify(clientInfo));
 
     dispatch(setClientInfo(clientInfo));
 

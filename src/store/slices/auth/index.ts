@@ -1,9 +1,9 @@
-import { Login } from "ts/interfaces";
-import { Token } from "ts/types";
+import { Login } from "ts/interface";
+import { Token } from "ts/type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
 import { createNewAccount, signIn } from "./helpers";
-import { clearUserDataCookie } from "utils/cookie";
+import { clearCookie } from "utils/cookie";
 
 interface Authentication {
   token: Token;
@@ -57,7 +57,7 @@ const authSlice = createSlice({
       state.email = payload;
     },
     onLogout(state) {
-      clearUserDataCookie();
+      clearCookie("");
 
       state.token = "";
       state.email = "";

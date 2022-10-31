@@ -1,20 +1,20 @@
 import arrowImage from "../../../assets/dropdown.png";
 import { useNavigate } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Service } from "../../../ts/interfaces";
-import FormInputs from "../../../components/modules/forms/FormInputs";
+import { Service } from "../../../ts/interface";
+import FormInputs from "../../../components/common/forms/FormInputs";
 import formModel from "../../../static/register/service";
-import CustomButton from "../../../components/modules/button";
 import { useAppDispatch } from "store";
 import { setServicesInfo } from "store/slices/services";
-import { LocalStorage } from "utils/localStorage";
-import { LOCAL_STORAGE_SERVICES } from "constants/index";
+import CustomButton from "components/common/button";
 
 const SelectServicePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const LocalStorageServices = LocalStorage.get(LOCAL_STORAGE_SERVICES);
+  const LocalStorageServices = JSON.parse(
+    localStorage.getItem("services") || "{}"
+  );
 
   const { register, handleSubmit, control } = useForm<Service>({
     defaultValues: LocalStorageServices,
@@ -23,7 +23,7 @@ const SelectServicePage = () => {
   const onSubmit: SubmitHandler<Service> = (servicesInfo) => {
     if (!servicesInfo) return;
 
-    LocalStorage.set(LOCAL_STORAGE_SERVICES, servicesInfo);
+    localStorage.setItem("services", JSON.stringify(servicesInfo));
 
     dispatch(setServicesInfo(servicesInfo));
 

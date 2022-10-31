@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import arrowImage from "assets/dropdown.png";
-import CustomButton from "components/modules/button";
 import { List, ListItem } from "@mui/material";
 import { useAppSelector } from "store";
 import { getRegisterClientInfo } from "store/slices/client";
@@ -8,15 +7,14 @@ import { getRegisterServicesInfo } from "store/slices/services";
 import OrderPopUp from "components/modules/popUp/order";
 import { useState } from "react";
 import { saveCookie } from "utils/cookie";
-import { COOKIE_USER_ORDER } from "constants/index";
 import { Box } from "@mui/system";
-import { LocalStorage } from "utils/localStorage";
+import CustomButton from "components/common/button";
 
 const FinishOrderPage = () => {
   const [isPopActive, setIsPopUpActive] = useState(false);
   const client = useAppSelector(getRegisterClientInfo);
   const services = useAppSelector(getRegisterServicesInfo);
-  
+
   const navigate = useNavigate();
 
   const { comments, email, name, phone } = client;
@@ -42,9 +40,9 @@ const FinishOrderPage = () => {
   };
 
   const finishOrder = () => {
-    LocalStorage.clear();
+    localStorage.clear();
 
-    saveCookie(COOKIE_USER_ORDER, {
+    saveCookie("userOrder", {
       comments,
       email,
       name,
@@ -63,43 +61,45 @@ const FinishOrderPage = () => {
 
   return (
     <form>
-      {isPopActive ? (
-        <OrderPopUp />
-      ) : (
-        <List sx={listStyles}>
+      <List sx={listStyles}>
+        <ListItem sx={listItemsStyles}>
+          <div>Service</div> <span>{serviceCategory}</span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Master</div> <span>{masters}</span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Date/Time</div>
+          <span>
+            {date} {timeFrom} - {timeTo}
+          </span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Price</div>
+          <span>
+            {price} {currency}
+          </span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Client name</div> <span>{name}</span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Client phone</div> <span>{phone}</span>
+        </ListItem>
+        <ListItem sx={listItemsStyles}>
+          <div>Client email</div> <span>{email}</span>
+        </ListItem>
+        {comments && (
           <ListItem sx={listItemsStyles}>
-            <div>Service</div> <span>{serviceCategory}</span>
+            <div>Comments</div> <span>{comments}</span>
           </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Master</div> <span>{masters}</span>
-          </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Date/Time</div>
-            <span>
-              {date} {timeFrom} - {timeTo}
-            </span>
-          </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Price</div>
-            <span>
-              {price} {currency}
-            </span>
-          </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Client name</div> <span>{name}</span>
-          </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Client phone</div> <span>{phone}</span>
-          </ListItem>
-          <ListItem sx={listItemsStyles}>
-            <div>Client email</div> <span>{email}</span>
-          </ListItem>
-          {comments && (
-            <ListItem sx={listItemsStyles}>
-              <div>Comments</div> <span>{comments}</span>
-            </ListItem>
-          )}
-        </List>
+        )}
+      </List>
+      {isPopActive && (
+        <OrderPopUp
+          open={isPopActive}
+          onClose={() => setIsPopUpActive(false)}
+        />
       )}
       <Box
         sx={{
