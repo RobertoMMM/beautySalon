@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Box from "../box/Box";
+import ItemBox from "../box/Box";
 import "./list.css";
 
 interface ListItems {
@@ -12,8 +12,8 @@ const List: FC<{ items: ListItems[]; title: string }> = ({ items, title }) => {
     <>
       <div className="listTitle">{title}</div>
       <div className="list">
-        {items.map((box, index) => (
-          <Box key={index} title={box.title} image={box.image} />
+        {items.map(({ title, image }, index) => (
+          <ItemBox key={index} title={title} image={image} />
         ))}
       </div>
     </>

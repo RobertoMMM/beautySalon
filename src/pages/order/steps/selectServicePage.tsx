@@ -5,8 +5,8 @@ import { Service } from "../../../ts/interfaces";
 import FormInputs from "../../../components/modules/forms/FormInputs";
 import formModel from "../../../static/register/service";
 import CustomButton from "../../../components/modules/button";
-import { useAppDispatch } from "app/store";
-import { setServicesInfo } from "features/services/servicesSlice";
+import { useAppDispatch } from "store";
+import { setServicesInfo } from "store/slices/services";
 
 const SelectServicePage = () => {
   const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import CustomButton from "components/modules/button";
 import FormInputs from "components/modules/forms/FormInputs";
-import { loginForm } from "static/loginFormInputs";
+import { loginForm } from "static/login/loginFormInputs";
 import { Login } from "ts/interfaces";
-import { onLogin } from "features/auth/authSlice";
-import { useAppDispatch } from "app/store";
+import { onLogin } from "store/slices/auth";
+import { useAppDispatch } from "store";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {

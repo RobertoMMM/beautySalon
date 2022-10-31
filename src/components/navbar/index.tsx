@@ -3,8 +3,8 @@ import womenImage from "assets/women.png";
 import dropdownImage from "assets/dropdown.png";
 import "./style.css";
 import CustomButton from "../modules/button";
-import { useAppDispatch } from "app/store";
-import { getUserName, onLogout } from "features/auth/authSlice";
+import { useAppDispatch } from "store";
+import { getUserName, onLogout } from "store/slices/auth";
 import { AppBar } from "@mui/material";
 import { useSelector } from "react-redux";
 

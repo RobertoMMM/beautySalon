@@ -5,9 +5,9 @@ import { ClientInformation } from "ts/interfaces";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormInputs from "components/modules/forms/FormInputs";
 import { clientForm } from "static/register/clientInformation";
-import { useAppDispatch, useAppSelector } from "app/store";
-import { setClientInfo } from "features/client/clientSlice";
-import { getUserEmail, getUserName } from "features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "store";
+import { setClientInfo } from "store/slices/client";
+import { getUserEmail, getUserName } from "store/slices/auth";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();

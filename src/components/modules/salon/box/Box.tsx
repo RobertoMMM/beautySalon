@@ -1,12 +1,12 @@
 import { FC } from "react";
 import "./box.css";
 
-interface Box {
+interface BoxStructure {
   title: string;
   image: string;
 }
 
-const Box: FC<Box> = ({ title, image }) => {
+const ItemBox: FC<BoxStructure> = ({ title, image }) => {
   return (
     <div className="box">
       <img src={image} />
@@ -15,4 +15,4 @@ const Box: FC<Box> = ({ title, image }) => {
   );
 };
 
-export default Box;
+export default ItemBox;

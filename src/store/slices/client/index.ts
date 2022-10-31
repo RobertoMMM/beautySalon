@@ -1,6 +1,6 @@
 import { Client } from "ts/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { RootState } from "store";
 
 const initialClient: Client = {
   name: "",

@@ -1,4 +1,4 @@
-import { COOKIE_USER_DATA } from "ts/constants";
+import { COOKIE_USER_DATA } from "constants/index";
 import Cookies from "js-cookie";
 
 const saveCookie = (name: string, newValue: any) => {

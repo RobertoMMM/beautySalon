@@ -1,7 +1,7 @@
 import { Login } from "ts/interfaces";
 import { Token } from "ts/types";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { RootState } from "store";
 import { createNewAccount, signIn } from "./helpers";
 import { clearUserDataCookie } from "utils/cookie";
 

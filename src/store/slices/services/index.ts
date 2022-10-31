@@ -1,6 +1,6 @@
 import { Service } from "ts/interfaces";
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "app/store";
+import { RootState } from "store";
 
 const initialState = {
   servicesInfo: {

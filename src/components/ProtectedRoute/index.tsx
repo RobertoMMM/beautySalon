@@ -1,5 +1,5 @@
-import { useAppSelector } from "app/store";
-import { getUserToken } from "features/auth/authSlice";
+import { useAppSelector } from "store";
+import { getUserToken } from "store/slices/auth";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ element }: { element: JSX.Element }) => {

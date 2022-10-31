@@ -8,7 +8,7 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "components/ProtectedRoute";
 import Layout from "components/navbar";
 
-const ROUTES = [
+const routes = [
   {
     path: "/",
     element: <Layout />,
@@ -38,6 +38,6 @@ const ROUTES = [
   },
 ];
 
-const router = createBrowserRouter(ROUTES);
+const router = createBrowserRouter(routes);
 
 export { router };

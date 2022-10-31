@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import arrowImage from "assets/dropdown.png";
 import CustomButton from "components/modules/button";
 import { List, ListItem } from "@mui/material";
-import { useAppSelector } from "app/store";
-import { getRegisterClientInfo } from "features/client/clientSlice";
-import { getRegisterServicesInfo } from "features/services/servicesSlice";
+import { useAppSelector } from "store";
+import { getRegisterClientInfo } from "store/slices/client";
+import { getRegisterServicesInfo } from "store/slices/services";
 import OrderPopUp from "components/modules/popUp/order";
 import { useState } from "react";
 import { saveCookie } from "utils/cookie";
-import { COOKIE_USER_ORDER } from "ts/constants";
+import { COOKIE_USER_ORDER } from "constants/index";
 
 const FinishOrderPage = () => {
   const [isPopActive, setIsPopUpActive] = useState(false);
