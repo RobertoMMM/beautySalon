@@ -9,36 +9,36 @@ import Layout from "components/navbar";
 import OrderStepsGenerator from "pages/order";
 
 const routes = [
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "login",
-        element: <LoginPage />,
-      },
-      {
-        path: "help",
-        element: <HelpPage />,
-      },
-      {
-        path: "orders",
-        element: <ProtectedRoute element={<OrdersPage />} />,
-      },
-      {
-        path: "order/:id",
-        element: <OrderStepsGenerator />,
-      },
-      {
-        path: "*",
-        element: <NoMatch />,
-      },
-    ],
-  },
+	{
+		path: "/",
+		element: <Layout />,
+		children: [
+			{
+				path: "/",
+				element: <Home />,
+			},
+			{
+				path: "login",
+				element: <LoginPage />,
+			},
+			{
+				path: "help",
+				element: <HelpPage />,
+			},
+			{
+				path: "orders",
+				element: <ProtectedRoute element={<OrdersPage />} />,
+			},
+			{
+				path: "order/:id",
+				element: <OrderStepsGenerator />,
+			},
+			{
+				path: "*",
+				element: <NoMatch />,
+			},
+		],
+	},
 ];
 
 const router = createBrowserRouter(routes);
