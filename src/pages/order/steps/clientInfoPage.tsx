@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from "store";
 import { setClientInfo } from "store/slices/client";
 import { getUserEmail, getUserName } from "store/slices/auth";
 import { Box } from "@mui/system";
+import { LocalStorage } from "utils/localStorage";
+import { LOCAL_STORAGE_CLIENT } from "constants/index";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();
@@ -18,14 +20,21 @@ const ClientInfoPage = () => {
   const email = useAppSelector(getUserEmail);
   const name = useAppSelector(getUserName);
 
+  const LocalStorageClient = LocalStorage.get(LOCAL_STORAGE_CLIENT);
+
   const { register, handleSubmit, control } = useForm<ClientInformation>({
     defaultValues: {
-      email,
-      name,
+      email: LocalStorageClient?.email || email,
+      name: LocalStorageClient?.name || name,
+      phone: LocalStorageClient?.phone,
     },
   });
 
   const onSubmit: SubmitHandler<ClientInformation> = (clientInfo) => {
+    if (!clientInfo) return;
+
+    LocalStorage.set(LOCAL_STORAGE_CLIENT, clientInfo);
+
     dispatch(setClientInfo(clientInfo));
 
     navigate("/order/3");

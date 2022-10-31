@@ -6,4 +6,15 @@ const COOKIE_USER_DATA = "userToken";
 
 const COOKIE_USER_ORDER = "userOrder";
 
-export { TOTAL_STEPS, SERVER_URL, COOKIE_USER_DATA, COOKIE_USER_ORDER };
+const LOCAL_STORAGE_SERVICES = "localStorageServices";
+
+const LOCAL_STORAGE_CLIENT = "localStorageClient";
+
+export {
+  TOTAL_STEPS,
+  SERVER_URL,
+  COOKIE_USER_DATA,
+  COOKIE_USER_ORDER,
+  LOCAL_STORAGE_SERVICES,
+  LOCAL_STORAGE_CLIENT,
+};

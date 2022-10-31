@@ -10,30 +10,18 @@ import { useState } from "react";
 import { saveCookie } from "utils/cookie";
 import { COOKIE_USER_ORDER } from "constants/index";
 import { Box } from "@mui/system";
+import { LocalStorage } from "utils/localStorage";
 
 const FinishOrderPage = () => {
   const [isPopActive, setIsPopUpActive] = useState(false);
-  const navigate = useNavigate();
   const client = useAppSelector(getRegisterClientInfo);
   const services = useAppSelector(getRegisterServicesInfo);
+  
+  const navigate = useNavigate();
 
   const { comments, email, name, phone } = client;
   const { date, masters, price, serviceCategory, timeTo, timeFrom, currency } =
     services;
-
-  saveCookie(COOKIE_USER_ORDER, {
-    comments,
-    email,
-    name,
-    phone,
-    date,
-    masters,
-    price,
-    serviceCategory,
-    timeFrom,
-    timeTo,
-    currency,
-  });
 
   const listStyles = {
     width: "579px",
@@ -51,6 +39,26 @@ const FinishOrderPage = () => {
       fontSize: "25px",
       whiteSpace: "nowrap",
     },
+  };
+
+  const finishOrder = () => {
+    LocalStorage.clear();
+
+    saveCookie(COOKIE_USER_ORDER, {
+      comments,
+      email,
+      name,
+      phone,
+      date,
+      masters,
+      price,
+      serviceCategory,
+      timeFrom,
+      timeTo,
+      currency,
+    });
+
+    setIsPopUpActive(true);
   };
 
   return (
@@ -107,9 +115,7 @@ const FinishOrderPage = () => {
           />
           Back
         </CustomButton>
-        <CustomButton onClick={() => setIsPopUpActive(true)}>
-          Create Order
-        </CustomButton>
+        <CustomButton onClick={finishOrder}>Create Order</CustomButton>
       </Box>
     </form>
   );
