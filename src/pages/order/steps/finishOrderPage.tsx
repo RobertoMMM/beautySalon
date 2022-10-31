@@ -9,6 +9,7 @@ import OrderPopUp from "components/modules/popUp/order";
 import { useState } from "react";
 import { saveCookie } from "utils/cookie";
 import { COOKIE_USER_ORDER } from "constants/index";
+import { Box } from "@mui/system";
 
 const FinishOrderPage = () => {
   const [isPopActive, setIsPopUpActive] = useState(false);
@@ -92,17 +93,24 @@ const FinishOrderPage = () => {
           )}
         </List>
       )}
-      <CustomButton onClick={() => navigate("/order/2")}>
-        <img
-          style={{ transform: "rotate(90deg)" }}
-          src={arrowImage}
-          alt="image"
-        />
-        Back
-      </CustomButton>
-      <CustomButton onClick={() => setIsPopUpActive(true)}>
-        Create Order
-      </CustomButton>
+      <Box
+        sx={{
+          display: "flex",
+          gap: "20px",
+        }}
+      >
+        <CustomButton onClick={() => navigate("/order/2")}>
+          <img
+            style={{ transform: "rotate(90deg)" }}
+            src={arrowImage}
+            alt="image"
+          />
+          Back
+        </CustomButton>
+        <CustomButton onClick={() => setIsPopUpActive(true)}>
+          Create Order
+        </CustomButton>
+      </Box>
     </form>
   );
 };

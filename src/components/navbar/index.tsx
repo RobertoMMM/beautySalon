@@ -39,31 +39,48 @@ const Layout = () => {
   const Navbar = () => {
     const userName = useSelector(getUserName)?.slice(0, 2) || "UK";
 
-    return (
-      <>
-        <AppBar sx={navStyles} position="fixed">
+    const Utils = () => {
+      return (
+        <div className="utils">
+          <CustomLink to="help" title="Help" />
+          <CustomLink to="orders" title="Orders" />
+          <div className="breakLine"></div>
+          <div className="userProfile">{userName}</div>
+          <div className="registration">Salon Registration</div>
+          <div className="dropdown">
+            <img src={dropdownImage} alt="dropdown" />
+            <div className="dropdownContent">
+              <CustomLink to="login" title="Login" />
+              <CustomLink to="order/1" title="Order" />
+              <CustomButton
+                sx={{ width: 90 }}
+                onClick={() => dispatch(onLogout())}
+              >
+                Sign out
+              </CustomButton>
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    const Company = () => {
+      return (
+        <>
           <img src={womenImage} alt="beautySalon" />
           <div className="title">
             <div className="main">PowerBeauty</div>
             <div className="secondary">Beauty is our duty</div>
           </div>
-          <div className="utils">
-            <CustomLink to="help" title="Help" />
-            <CustomLink to="orders" title="Orders" />
-            <div className="breakLine"></div>
-            <div className="userProfile">{userName}</div>
-            <div className="registration">Salon Registration</div>
-            <div className="dropdown">
-              <img src={dropdownImage} alt="dropdown" />
-              <div className="dropdownContent">
-                <CustomLink to="login" title="Login" />
-                <CustomLink to="order/1" title="Order" />
-                <CustomButton onClick={() => dispatch(onLogout())}>
-                  Sign out
-                </CustomButton>
-              </div>
-            </div>
-          </div>
+        </>
+      );
+    };
+
+    return (
+      <>
+        <AppBar sx={navStyles} position="fixed">
+          <Company />
+          <Utils />
         </AppBar>
       </>
     );

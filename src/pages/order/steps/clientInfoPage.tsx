@@ -8,6 +8,7 @@ import { clientForm } from "static/register/clientInformation";
 import { useAppDispatch, useAppSelector } from "store";
 import { setClientInfo } from "store/slices/client";
 import { getUserEmail, getUserName } from "store/slices/auth";
+import { Box } from "@mui/system";
 
 const ClientInfoPage = () => {
   const navigate = useNavigate();
@@ -41,22 +42,29 @@ const ClientInfoPage = () => {
             control={control}
           />
         ))}
-        <CustomButton onClick={() => navigate("/order/1")}>
-          <img
-            style={{ transform: "rotate(90deg)" }}
-            src={arrowImage}
-            alt="image"
-          />
-          Back
-        </CustomButton>
-        <CustomButton type="submit">
-          Next step
-          <img
-            style={{ transform: "rotate(-90deg)" }}
-            src={arrowImage}
-            alt="image"
-          />
-        </CustomButton>
+        <Box
+          sx={{
+            display: "flex",
+            gap: "20px",
+          }}
+        >
+          <CustomButton onClick={() => navigate("/order/1")}>
+            <img
+              style={{ transform: "rotate(90deg)" }}
+              src={arrowImage}
+              alt="image"
+            />
+            Back
+          </CustomButton>
+          <CustomButton type="submit">
+            Next step
+            <img
+              style={{ transform: "rotate(-90deg)" }}
+              src={arrowImage}
+              alt="image"
+            />
+          </CustomButton>
+        </Box>
       </form>
     </>
   );
