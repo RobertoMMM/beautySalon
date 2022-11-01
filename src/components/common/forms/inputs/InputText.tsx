@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { FormHelperText } from "@mui/joy";
 import { TextField } from "@mui/material";
 
 const StyledTextField = styled(TextField)(() => ({
@@ -15,9 +16,12 @@ const StyledTextField = styled(TextField)(() => ({
   "label.Mui-focused": {
     color: "rgba(0, 0, 0, 0.96)",
   },
+  p: {
+    color: "red",
+  },
 }));
 
-const InputText = ({ element, register }: any) => {
+const InputText = ({ element, register, errors }: any) => {
   const { label, name, placeholder } = element;
 
   const params = {
@@ -25,10 +29,15 @@ const InputText = ({ element, register }: any) => {
     name,
     placeholder,
     label,
+    helperText: errors[name]?.message ?? "",
     ...register(name, { ...element.register }),
   };
 
-  return <StyledTextField {...params} />;
+  return (
+    <>
+      <StyledTextField {...params} />
+    </>
+  );
 };
 
 export default InputText;

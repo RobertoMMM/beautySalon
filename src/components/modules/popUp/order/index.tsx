@@ -3,6 +3,37 @@ import { useNavigate } from "react-router-dom";
 import { forwardRef } from "react";
 import { TransitionProps } from "@mui/material/transitions";
 
+const popUpStyles = {
+  background: "#ffffff",
+  width: "500px",
+  height: "300px",
+  textAlign: "center",
+  borderRadius: "20px",
+  "& div": {
+    position: "relative",
+    top: "30%",
+  },
+  "& div:nth-of-type(1)": {
+    top: "15%",
+    color: "#5255C8",
+    fontSize: "22px",
+    textTransform: "capitalize",
+  },
+  "& div:nth-of-type(2)": {
+    top: "30%",
+  },
+  "& button": {
+    position: "relative",
+    top: "50%",
+    marginLeft: "10px",
+    height: "40px",
+    background: "#5255C8",
+  },
+  "& button:nth-of-type(1)": {
+    background: "#ffffff",
+  },
+};
+
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -15,36 +46,6 @@ const Transition = forwardRef(function Transition(
 const OrderPopUp = ({ open, onClose }: { open: boolean; onClose: any }) => {
   const navigate = useNavigate();
 
-  const popUpStyles = {
-    background: "#ffffff",
-    width: "500px",
-    height: "300px",
-    textAlign: "center",
-    borderRadius: "20px",
-    "& div": {
-      position: "relative",
-      top: "30%",
-    },
-    "& div:nth-of-type(1)": {
-      top: "15%",
-      color: "#5255C8",
-      fontSize: "22px",
-      textTransform: "capitalize",
-    },
-    "& div:nth-of-type(2)": {
-      top: "30%",
-    },
-    "& button": {
-      position: "relative",
-      top: "50%",
-      marginLeft: "10px",
-      height: "40px",
-      background: "#5255C8",
-    },
-    "& button:nth-of-type(1)": {
-      background: "#ffffff",
-    },
-  };
   return (
     <Dialog open={open} onClose={onClose} TransitionComponent={Transition}>
       <Box component="div" sx={popUpStyles}>

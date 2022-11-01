@@ -13,35 +13,33 @@ const createNewAccount = async ({ email, password, username }: Login) => {
   });
 
   const userEmail = user.email;
-  const userToken = jwt;
+  const token = jwt;
 
   saveCookie("userToken", {
-    token: jwt,
+    token,
     email: userEmail,
     username,
   });
 
-  return { userToken, userEmail };
+  return { token };
 };
 
-const signIn = async ({ username, password }: Login) => {
+const signIn = async ({ email, username, password }: Login) => {
   const URL = `${API}/api/auth/local`;
 
-  const { user, jwt } = await HTTP.post(URL, {
+  const { jwt } = await HTTP.post(URL, {
     identifier: username,
     password,
   });
-
-  const userEmail = user.email;
-  const userToken = jwt;
+  const token = jwt;
 
   saveCookie("userToken", {
-    token: jwt,
-    email: userEmail,
+    token,
+    email,
     username,
   });
 
-  return { userToken, userEmail };
+  return { token };
 };
 
 export { createNewAccount, signIn };

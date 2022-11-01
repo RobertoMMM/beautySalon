@@ -1,4 +1,4 @@
-import { Autocomplete, styled, TextField } from "@mui/material";
+import { Autocomplete, FormHelperText, styled, TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -29,9 +29,12 @@ const StyledAutcomplete = styled(Autocomplete)(() => ({
     fontSize: "32px",
     color: "rgba(0, 0, 0, 0.96)",
   },
+  p: {
+    color: "red",
+  },
 }));
 
-const SelectInput = ({ element, register, control }: any) => {
+const SelectInput = ({ element, register, control, errors }: any) => {
   const { label, name, options, placeholder } = element;
 
   return (
@@ -54,7 +57,12 @@ const SelectInput = ({ element, register, control }: any) => {
               option.id === value.id
             }
             renderInput={(params) => (
-              <TextField {...params} label={label} placeholder={placeholder} />
+              <TextField
+                {...params}
+                label={label}
+                placeholder={placeholder}
+                helperText={errors[name]?.message}
+              />
             )}
           />
         )}

@@ -16,7 +16,12 @@ const SelectServicePage = () => {
     localStorage.getItem("services") || "{}"
   );
 
-  const { register, handleSubmit, control } = useForm<Service>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<Service>({
     defaultValues: LocalStorageServices,
   });
 
@@ -39,6 +44,7 @@ const SelectServicePage = () => {
             element={element}
             register={register}
             control={control}
+            errors={errors}
           />
         ))}
         <CustomButton type="submit">

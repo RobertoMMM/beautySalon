@@ -8,6 +8,8 @@ export const loginForm = [
       required: "Username is required",
       pattern: {
         value: /^[a-z0-9_-]{3,15}.{10,}$/,
+        message:
+          "Make sure username length is more than 13 characters and it contains only letters and numbers",
       },
     },
   },
@@ -20,6 +22,7 @@ export const loginForm = [
       required: "Email is required",
       pattern: {
         value: /[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+/,
+        message: "Invalid email",
       },
     },
   },
@@ -33,6 +36,8 @@ export const loginForm = [
       pattern: {
         value:
           /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+        message:
+          "Password should contain numbers, letters(including uppercase), and special symbols",
       },
     },
   },

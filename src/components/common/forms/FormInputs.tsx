@@ -5,7 +5,7 @@ import PasswordInput from "./inputs/PasswordInput";
 import SelectInput from "./inputs/SelectInput";
 import TextareaInput from "./inputs/Textarea";
 
-const FormInputs = ({ element, register, control }: any) => {
+const FormInputs = ({ element, register, control, errors }: any) => {
   let InputElement;
   switch (element.type) {
     case "text":
@@ -31,7 +31,12 @@ const FormInputs = ({ element, register, control }: any) => {
   }
 
   return (
-    <InputElement element={element} register={register} control={control} />
+    <InputElement
+      element={element}
+      register={register}
+      errors={errors}
+      control={control}
+    />
   );
 };
 

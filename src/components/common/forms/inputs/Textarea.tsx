@@ -17,6 +17,7 @@ const TextareaInput = ({ element, register }: any) => {
       name={name}
       minRows={2}
       placeholder={placeholder}
+      id={Math.random()}
       {...register(name, { ...element.register })}
     />
   );

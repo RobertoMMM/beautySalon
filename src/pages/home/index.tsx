@@ -1,30 +1,38 @@
 import { masters } from "../../static/masters/store";
-import "./home.css";
 import List from "components/modules/salon/list";
 import { products } from "static/products/store";
 import { services } from "static/services/store";
+import { Box } from "@mui/system";
+
+const styledBoxItems = {
+  position: "relative",
+  top: "132px",
+  width: "90%",
+  left: "89px",
+  marginBottom: "100px",
+};
 
 const Services = () => {
   return (
-    <div className="services">
+    <Box sx={styledBoxItems}>
       <List items={services} title="Services"></List>
-    </div>
+    </Box>
   );
 };
 
 const Products = () => {
   return (
-    <div className="products">
+    <Box sx={styledBoxItems}>
       <List items={products} title="Products"></List>
-    </div>
+    </Box>
   );
 };
 
 const Masters = () => {
   return (
-    <div className="masters">
+    <Box sx={styledBoxItems}>
       <List items={masters} title="Masters"></List>
-    </div>
+    </Box>
   );
 };
 

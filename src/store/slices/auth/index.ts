@@ -1,8 +1,6 @@
-import { Login } from "ts/interface";
 import { Token } from "ts/type";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "store";
-import { createNewAccount, signIn } from "./helpers";
 import { clearCookie } from "utils/cookie";
 
 interface Authentication {
@@ -19,30 +17,6 @@ const initialState: Authentication = {
   username: "",
 };
 
-const onLogin = createAsyncThunk(
-  "auth/signOrCreateUser",
-  async ({ email, password, username }: Login) => {
-    try {
-      const { userToken: token, userEmail } = await signIn({
-        email,
-        password,
-        username,
-      });
-
-      return { email: userEmail, password, token, username };
-    } catch (e) {
-      console.log(e);
-      const { userToken: token, userEmail } = await createNewAccount({
-        email,
-        password,
-        username,
-      });
-
-      return { email: userEmail, password, token, username };
-    }
-  }
-);
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -56,6 +30,17 @@ const authSlice = createSlice({
     setUserEmail(state, { payload }: { payload: string }) {
       state.email = payload;
     },
+    onLogin(
+      state,
+      {
+        payload: { email, token, password, username },
+      }: { payload: Authentication }
+    ) {
+      state.token = token;
+      state.email = email;
+      state.password = password;
+      state.username = username;
+    },
     onLogout(state) {
       clearCookie("");
 
@@ -65,26 +50,13 @@ const authSlice = createSlice({
       state.username = "";
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(
-      onLogin.fulfilled,
-      (state, { payload }: { payload: Authentication }) => {
-        state.token = payload.token;
-        state.email = payload.email;
-        state.password = payload.password;
-        state.username = payload.username;
-      }
-    );
-  },
 });
 
-export const { setToken, onLogout, setUserName, setUserEmail } =
+export const { setToken, onLogout, onLogin, setUserName, setUserEmail } =
   authSlice.actions;
 
 export const getUserToken = ({ auth }: RootState) => auth.token;
 export const getUserEmail = ({ auth }: RootState) => auth.email;
 export const getUserName = ({ auth }: RootState) => auth.username;
-
-export { onLogin };
 
 export default authSlice.reducer;

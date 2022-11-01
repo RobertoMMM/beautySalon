@@ -22,7 +22,12 @@ const ClientInfoPage = () => {
     localStorage.getItem("client") || "{}"
   );
 
-  const { register, handleSubmit, control } = useForm<ClientInformation>({
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<ClientInformation>({
     defaultValues: {
       email: LocalStorageClientData?.email || email,
       name: LocalStorageClientData?.name || name,
@@ -49,6 +54,7 @@ const ClientInfoPage = () => {
             element={element}
             register={register}
             control={control}
+            errors={errors}
           />
         ))}
         <Box

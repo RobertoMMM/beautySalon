@@ -15,21 +15,29 @@ const StyledTextField = styled(TextField)(() => ({
   "label.Mui-focused": {
     color: "rgba(0, 0, 0, 0.96)",
   },
+  p: {
+    color: "red",
+  },
 }));
 
-const EmailInput = ({ element, register }: any) => {
+const EmailInput = ({ element, register, errors }: any) => {
   const { label, name, placeholder } = element;
 
   const params = {
-    type: "email",
+    type: "text",
     name,
     placeholder,
     id: "demo-helper-text-aligned",
     label,
+    helperText: errors[name]?.message ?? "",
     ...register(name, { ...element.register }),
   };
 
-  return <StyledTextField {...params} />;
+  return (
+    <>
+      <StyledTextField {...params} />
+    </>
+  );
 };
 
 export default EmailInput;
