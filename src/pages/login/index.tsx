@@ -40,58 +40,60 @@ const LoginPage = () => {
 		formState: { errors },
 	} = useForm<Login>();
 
+	const awaitToNavigateHome = () => {
+		setTimeout(() => {
+			navigate("/");
+		}, 2000);
+	};
+
 	const signIn = async ({ email, password, username }: Login) => {
+		setIsPending(true);
+
 		try {
-			setIsPending(true);
 			const { token } = await login({ email, password, username });
 
-			setIsOpenedSnackbar(true);
 			setAuthState({
 				message: "Login succesfull.",
 				state: true,
 			});
 
 			dispatch(onLogin({ email, password, username, token }));
-			setIsPending(false);
 
-			setTimeout(() => {
-				navigate("/");
-			}, 2000);
+			awaitToNavigateHome();
 		} catch (e: any) {
-			setIsPending(false);
-			setIsOpenedSnackbar(true);
 			setAuthState({
 				message: "LOGIN FAILED.",
 				state: false,
 			});
 		}
+
+		setIsPending(false);
+		setIsOpenedSnackbar(true);
 	};
 
 	const signUp = async ({ email, password, username }: Login) => {
+		setIsPending(true);
+
 		try {
-			setIsPending(true);
 			const { token } = await createNewAccount({ email, password, username });
 
-			setIsOpenedSnackbar(true);
 			setAuthState({
 				message: "User succesfull created.",
 				state: true,
 			});
 
 			dispatch(onLogin({ email, password, username, token }));
-			setIsPending(false);
 
-			setTimeout(() => {
-				navigate("/");
-			}, 2000);
+			awaitToNavigateHome();
 		} catch (e: any) {
-			setIsPending(false);
-			setIsOpenedSnackbar(true);
 			setAuthState({
 				message: "LOGOUT FAILED.",
 				state: false,
 			});
 		}
+
+		setIsPending(false);
+		setIsOpenedSnackbar(true);
 	};
 
 	const onSubmit: SubmitHandler<Login> = async ({
@@ -112,6 +114,10 @@ const LoginPage = () => {
 
 	const setToLogin = () => {
 		setIsUserLogin(true);
+	};
+
+	const handleSnackbar = () => {
+		setIsOpenedSnackbar(!isOpenedSnackbar);
 	};
 
 	return (
@@ -135,9 +141,9 @@ const LoginPage = () => {
 			<Snackbar
 				open={isOpenedSnackbar}
 				autoHideDuration={1000}
-				onClose={() => setIsOpenedSnackbar(!isOpenedSnackbar)}>
+				onClose={handleSnackbar}>
 				<Alert
-					onClose={() => setIsOpenedSnackbar(!isOpenedSnackbar)}
+					onClose={handleSnackbar}
 					severity={authState?.state ? "success" : "error"}
 					sx={{ width: "100%" }}>
 					{authState?.message}
