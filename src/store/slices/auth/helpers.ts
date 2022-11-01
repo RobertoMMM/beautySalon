@@ -24,7 +24,7 @@ const createNewAccount = async ({ email, password, username }: Login) => {
   return { token };
 };
 
-const signIn = async ({ email, username, password }: Login) => {
+const login = async ({ email, username, password }: Login) => {
   const URL = `${API}/api/auth/local`;
 
   const { jwt } = await HTTP.post(URL, {
@@ -42,4 +42,4 @@ const signIn = async ({ email, username, password }: Login) => {
   return { token };
 };
 
-export { createNewAccount, signIn };
+export { createNewAccount, login };

@@ -8,7 +8,7 @@ import { useAppDispatch } from "store";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "components/common/button";
 import { Snackbar } from "@mui/material";
-import { createNewAccount, signIn } from "store/slices/auth/helpers";
+import { createNewAccount, login } from "store/slices/auth/helpers";
 import { forwardRef } from "react";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 import Backdrop from "@mui/material/Backdrop";
@@ -40,10 +40,10 @@ const LoginPage = () => {
 		formState: { errors },
 	} = useForm<Login>();
 
-	const Login = async ({ email, password, username }: Login) => {
+	const signIn = async ({ email, password, username }: Login) => {
 		try {
 			setIsPending(true);
-			const { token } = await signIn({ email, password, username });
+			const { token } = await login({ email, password, username });
 
 			setIsOpenedSnackbar(true);
 			setAuthState({
@@ -100,7 +100,7 @@ const LoginPage = () => {
 		username,
 	}) => {
 		if (isUserLogin) {
-			await Login({ email, password, username });
+			await signIn({ email, password, username });
 		} else {
 			await signUp({ email, password, username });
 		}
